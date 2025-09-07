@@ -126,7 +126,7 @@ if [ -f "$Gen24_Path/cron_draft" ]; then
     if ! "$(bashio::config 'akkudoktor_weather')"; then
         sed -i "s*#akku**g" "$Gen24_Path/cron_file"
     fi
-    if [ ! "$(bashio::config 'forecast_solar')"; then
+    if  ! "$(bashio::config 'forecast_solar')"; then
         sed -i "s*#forecast**g" "$Gen24_Path/cron_file"
     fi
     if ! "$(bashio::config 'solcast')"; then
