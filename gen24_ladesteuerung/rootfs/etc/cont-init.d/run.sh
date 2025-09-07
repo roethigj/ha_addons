@@ -118,6 +118,7 @@ fi
 echo "crontab"
 echo $(bashio::config 'forecast_solar')
 forecast_solar=$(bashio::config 'forecast_solar')
+solcast=$(bashio::config 'solcast')
 
 c_int=$(bashio::config 'scheduler_interval_minutes')
 if [ -f "$Gen24_Path/cron_draft" ]; then
@@ -127,13 +128,13 @@ if [ -f "$Gen24_Path/cron_draft" ]; then
     else
         cp $Gen24_Path/cron_draft $Gen24_Path/cron_file
     fi
-    if [ $(bashio::config 'akkudoktor_weather')=true ]; then
+    if [ "$(bashio::config 'akkudoktor_weather')"=true ]; then
         sed -i "s*#akku**g" "$Gen24_Path/cron_file"
     fi
     if [ $forecast_solar=true ]; then
         sed -i "s*#forecast**g" "$Gen24_Path/cron_file"
     fi
-    if [ $(bashio::config 'solcast')=true ]; then
+    if [ "$solcast"=true ]; then
         sed -i "s*#solcast**g" "$Gen24_Path/cron_file"
     fi
     if [ $(bashio::config 'solcast_homeassistant')=true ]; then
