@@ -117,7 +117,7 @@ fi
 #Crontab
 echo "crontab"
 echo $(bashio::config 'forecast_solar')
-forecast_solar = $(bashio::config 'forecast_solar')
+forecast_solar=$(bashio::config 'forecast_solar')
 
 c_int=$(bashio::config 'scheduler_interval_minutes')
 if [ -f "$Gen24_Path/cron_draft" ]; then
