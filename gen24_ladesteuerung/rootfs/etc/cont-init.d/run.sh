@@ -99,7 +99,7 @@ if [ -f "$Gen24_Path/CONFIG/default_priv.ini" ]; then
     sed -e "s/^hostNameOrIp *= *.*/hostNameOrIp = $ip_adresse/" \
         -e "s/^password *= *.*/password = '$kennwort'/" \
         -e "s/^user *= *.*/user = $user/" \
-        -e "s/^battery_capacity_wh *= *.*/battery_capacity_wh = $battery_capacity_wh/" \
+        -e "s/^battery_capacity_Wh *= *.*/battery_capacity_Wh = $battery_capacity_wh/" \
         -e "s/^Einfacher_PHP_Webserver *= *.*/Einfacher_PHP_Webserver = $webserver/" \
         $Gen24_Path/CONFIG/default.ini > $Gen24_Path/CONFIG/default_priv.ini
 fi
