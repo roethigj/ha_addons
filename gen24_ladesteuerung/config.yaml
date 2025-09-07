@@ -1,0 +1,58 @@
+name: GEN24 Ladesteuerung
+version: "0.31.5-ha2"
+slug: gen24_ladesteuerung
+description: "Wrapper-Add-on für wiggal/GEN24_Ladesteuerung (Fronius GEN24 prognosebasierte Akku-Ladesteuerung + WebUI)"
+url: https://github.com/wiggal/GEN24_Ladesteuerung
+arch:
+  - aarch64
+  - amd64
+  - armv7
+startup: application
+boot: auto
+advanced: true
+hassio_api: true
+ingress: true
+ingress_port: 2424
+ingress_stream: false
+panel_icon: mdi:solar-power
+init: false
+map:
+  - config:rw
+  - share:rw
+ports:
+  2424/tcp: 2424
+webui: "http://[HOST]:[PORT:2424]/"
+options:
+  repo_url: "https://github.com/wiggal/GEN24_Ladesteuerung.git"
+  repo_branch: "main"
+  php_webserver: true
+  dynamic_price_check: false
+  akkudoktor_weather: false
+  forecast_solar: false
+  solcast: false
+  solcast_homeassistant: false
+  openmeteo: false
+  solarprognose: false
+  scheduler_interval_minutes: 10
+  fronius:
+    host: "192.168.1.50"
+    user: "customer"
+    password: "password"
+    battery_capacity_wh: 11000
+schema:
+  repo_url: str
+  repo_branch: str
+  php_webserver: bool
+  dynamic_price_check: bool
+  akkudoktor_weather: bool
+  forecast_solar: bool
+  solcast: bool
+  solcast_homeassistant: bool
+  openmeteo: bool
+  solarprognose: bool
+  scheduler_interval_minutes: int
+  fronius:
+    host: str
+    user: str
+    password: str
+    battery_capacity_wh: int
