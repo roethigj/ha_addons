@@ -1,9 +1,0 @@
-1-56/c_int * * * * REPO_DIR/start_PythonScript.sh http_SymoGen24Controller2.py logging
-#akku 2 3-21 * * * REPO_DIR/start_PythonScript.sh FORECAST/Akkudoktor__WeatherData.py
-#forecast 3 3,7,9,11,13,15,17,19 * * * REPO_DIR/start_PythonScript.sh FORECAST/Forecast_solar__WeatherData.py
-#solcast 4 3,7,9,11,13,15,17,19 * * * REPO_DIR/start_PythonScript.sh FORECAST/Solcast_WeatherData.py
-#sol_ha 4 3,7,9,11,13,15,17,19 * * * REPO_DIR/start_PythonScript.sh ADDONS/Solcast_WeatherData_from_HA.py
-#open 32 * * * * REPO_DIR/start_PythonScript.sh FORECAST/OpenMeteo_WeatherData.py
-#sol_prog 7 3,7,9,11,13,15,17,19 * * * REPO_DIR/start_PythonScript.sh FORECAST/Solarprognose_WeatherData.py
-#dyn_price 58 * * * * REPO_DIR/start_PythonScript.sh -o LOG_DynamicPriceCheck.log DynamicPriceCheck.py
-# 0 0 * * 1 mv REPO_DIR/Crontab.log REPO_DIR/Crontab.log_weg
