@@ -116,6 +116,8 @@ fi
 
 #Crontab
 echo "crontab"
+echo $(bashio::config 'forecast_solar')
+forecast_solar = $(bashio::config 'forecast_solar')
 
 c_int=$(bashio::config 'scheduler_interval_minutes')
 if [ -f "$Gen24_Path/cron_draft" ]; then
@@ -128,7 +130,7 @@ if [ -f "$Gen24_Path/cron_draft" ]; then
     if [ $(bashio::config 'akkudoktor_weather')=true ]; then
         sed -i "s*#akku**g" "$Gen24_Path/cron_file"
     fi
-    if [ $(bashio::config 'forecast_solar')=true ]; then
+    if [ $forecast_solar=true ]; then
         sed -i "s*#forecast**g" "$Gen24_Path/cron_file"
     fi
     if [ $(bashio::config 'solcast')=true ]; then
@@ -153,7 +155,7 @@ fi
 crontab $Gen24_Path/cron_file
 echo "und los..."
 
-# $Gen24_Path/start_PythonScript.sh http_SymoGen24Controller2.py
+$Gen24_Path/start_PythonScript.sh http_SymoGen24Controller2.py
 
 echo "crond"
 crond
