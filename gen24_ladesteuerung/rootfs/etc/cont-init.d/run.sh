@@ -155,8 +155,9 @@ if [ -f "$Gen24_Path/cron_draft" ]; then
 fi
 crontab $Gen24_Path/cron_file
 echo "und los..."
-
-$Gen24_Path/start_PythonScript.sh http_SymoGen24Controller2.py
+if [ ! $kennwort="password" ]; then
+    $Gen24_Path/start_PythonScript.sh http_SymoGen24Controller2.py
+fi
 
 echo "crond"
 crond
