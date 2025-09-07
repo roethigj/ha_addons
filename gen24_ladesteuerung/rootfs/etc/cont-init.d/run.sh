@@ -139,6 +139,8 @@ if [ -f "$Gen24_Path/cron_draft" ]; then
     fi
     if [ ! "$(bashio::config 'solcast_homeassistant')"='true' ]; then
         sed -i "s*#sol_ha**g" "$Gen24_Path/cron_file"
+    else
+        echo $(bashio::config 'solcast_homeassistant')
     fi
     if [ ! "$(bashio::config 'openmeteo')"='true'  ]; then
         sed -i "s*#open**g" "$Gen24_Path/cron_file"
