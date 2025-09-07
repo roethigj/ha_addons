@@ -4,9 +4,9 @@ Gen24_Path="/opt/Gen24_Ladesteuerung"
 ip_adresse=$(bashio::config 'fronius.host')
 kennwort=$(bashio::config 'fronius.password')
 user=$(bashio::config 'fronius.user')
+battery_capacity_wh=$(bashio::config 'fronius.battery_capacity_wh')
 
-
-if [ $(bashio::config 'php_webserver') ]; then
+if $(bashio::config 'php_webserver'); then
     webserver=1
 else
     webserver=0
@@ -24,7 +24,6 @@ else
 fi
 
 # Pfade für ingress anpassen
-echo "Pfade anpassen"
 if [ -f "$Gen24_Path/html/config.php" ]; then
     sed -i -e "s#^\$PythonDIR *= *.*#\$PythonDIR = '$Gen24_Path';#" \
     $Gen24_Path/html/config.php
@@ -36,7 +35,6 @@ find "$Gen24_Path/html" -type f -name "*.php" -print0 | while IFS= read -r -d ''
 done
 
 # Import für python anpassen
-echo "python"
 find "$Gen24_Path/FUNCTIONS" -type f -name "*.py" -print0 | while IFS= read -r -d '' file; do
     sed -i 's#'\''FUNCTIONS.'\''##g' "$file"
 done
@@ -45,7 +43,6 @@ find "$Gen24_Path/ADDONS" -type f -name "*.py" -print0 | while IFS= read -r -d '
 done
 
 # Verlinke Datenbanken und configs
-echo "Datenbanklinks"
 if [ ! -f /data/PV_Daten.sqlite ]; then
     mv $Gen24_Path/PV_Daten.sqlite /data
     ln -s /data/PV_Daten.sqlite $Gen24_Path/
@@ -95,7 +92,6 @@ find "$Gen24_Path/CONFIG" -type f -name "*_priv.ini" -print0 | while IFS= read -
         ln -s "/data/$file" "$Gen24_Path/CONFIG/"
     fi
 done
-echo "98"
 
 # CONFIG/default_priv.ini mit Benutzereingaben erzeugen
 
@@ -103,6 +99,7 @@ if [ -f "$Gen24_Path/CONFIG/default_priv.ini" ]; then
     sed -e "s/^hostNameOrIp *= *.*/hostNameOrIp = $ip_adresse/" \
         -e "s/^password *= *.*/password = '$kennwort'/" \
         -e "s/^user *= *.*/user = $user/" \
+        -e "s/^battery_capacity_wh *= *.*/battery_capacity_wh = $battery_capacity_wh/" \
         -e "s/^Einfacher_PHP_Webserver *= *.*/Einfacher_PHP_Webserver = $webserver/" \
         $Gen24_Path/CONFIG/default.ini > $Gen24_Path/CONFIG/default_priv.ini
 fi
@@ -115,8 +112,6 @@ else
 fi
 
 #Crontab
-echo "crontab"
-echo $(bashio::config 'forecast_solar')
 forecast_solar=$(bashio::config 'forecast_solar')
 solcast=$(bashio::config 'solcast')
 
@@ -128,27 +123,25 @@ if [ -f "$Gen24_Path/cron_draft" ]; then
     else
         cp $Gen24_Path/cron_draft $Gen24_Path/cron_file
     fi
-    if [ ! "$(bashio::config 'akkudoktor_weather')"='true' ]; then
+    if ! "$(bashio::config 'akkudoktor_weather')"; then
         sed -i "s*#akku**g" "$Gen24_Path/cron_file"
     fi
-    if [ ! "$(bashio::config 'forecast_solar')"='true' ]; then
+    if [ ! "$(bashio::config 'forecast_solar')"; then
         sed -i "s*#forecast**g" "$Gen24_Path/cron_file"
     fi
-    if [ ! "$(bashio::config 'solcast')"='true' ]; then
+    if ! "$(bashio::config 'solcast')"; then
         sed -i "s*#solcast**g" "$Gen24_Path/cron_file"
     fi
-    if [ ! "$(bashio::config 'solcast_homeassistant')"='true' ]; then
+    if ! "$(bashio::config 'solcast_homeassistant')"; then
         sed -i "s*#sol_ha**g" "$Gen24_Path/cron_file"
-    else
-        echo $(bashio::config 'solcast_homeassistant')
     fi
-    if [ ! "$(bashio::config 'openmeteo')"='true'  ]; then
+    if ! "$(bashio::config 'openmeteo')"; then
         sed -i "s*#open**g" "$Gen24_Path/cron_file"
     fi
-    if [ ! "$(bashio::config 'solarprognose')"='true' ]; then
+    if ! "$(bashio::config 'solarprognose')"; then
         sed -i "s*#sol_prog**g" "$Gen24_Path/cron_file"
     fi
-    if [ ! "$(bashio::config 'dynamic_price_check')"='true' ]; then
+    if ! "$(bashio::config 'dynamic_price_check')"; then
         sed -i "s*#dyn_price**g" "$Gen24_Path/cron_file"
     fi
     sed -i "s#c_int#$c_int#g" "$Gen24_Path/cron_file"
@@ -158,7 +151,6 @@ fi
 crontab $Gen24_Path/cron_file
 
 if [ ! "$kennwort" = "password" ]; then
-    echo "ich starte"
     $Gen24_Path/start_PythonScript.sh http_SymoGen24Controller2.py
 fi
 crond
