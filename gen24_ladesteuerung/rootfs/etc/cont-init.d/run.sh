@@ -128,25 +128,25 @@ if [ -f "$Gen24_Path/cron_draft" ]; then
     else
         cp $Gen24_Path/cron_draft $Gen24_Path/cron_file
     fi
-    if [ "$(bashio::config 'akkudoktor_weather')"=true ]; then
+    if [ ! "$(bashio::config 'akkudoktor_weather')" ]; then
         sed -i "s*#akku**g" "$Gen24_Path/cron_file"
     fi
-    if [ $forecast_solar=true ]; then
+    if [ $forecast_solar="true" ]; then
         sed -i "s*#forecast**g" "$Gen24_Path/cron_file"
     fi
-    if [ "$solcast"=true ]; then
+    if [ "$solcast"="true" ]; then
         sed -i "s*#solcast**g" "$Gen24_Path/cron_file"
     fi
-    if [ $(bashio::config 'solcast_homeassistant')=true ]; then
+    if [ ! $(bashio::config 'solcast_homeassistant') ]; then
         sed -i "s*#sol_ha**g" "$Gen24_Path/cron_file"
     fi
-    if [ $(bashio::config 'openmeteo')=true ]; then
+    if [ ! $(bashio::config 'openmeteo')  ]; then
         sed -i "s*#open**g" "$Gen24_Path/cron_file"
     fi
-    if [ $(bashio::config 'solarprognose')=true ]; then
+    if [ ! $(bashio::config 'solarprognose') ]; then
         sed -i "s*#sol_prog**g" "$Gen24_Path/cron_file"
     fi
-    if [ $(bashio::config 'dynamic_price_check')=true ]; then
+    if [ ! $(bashio::config 'dynamic_price_check') ]; then
         sed -i "s*#dyn_price**g" "$Gen24_Path/cron_file"
     fi
     sed -i "s#c_int#$c_int#g" "$Gen24_Path/cron_file"
