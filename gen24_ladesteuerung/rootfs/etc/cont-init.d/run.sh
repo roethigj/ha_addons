@@ -131,10 +131,10 @@ if [ -f "$Gen24_Path/cron_draft" ]; then
     if [ ! "$(bashio::config 'akkudoktor_weather')" ]; then
         sed -i "s*#akku**g" "$Gen24_Path/cron_file"
     fi
-    if [ $forecast_solar="true" ]; then
+    if [ ! $(bashio::config 'forecast_solar') ]; then
         sed -i "s*#forecast**g" "$Gen24_Path/cron_file"
     fi
-    if [ "$solcast"="true" ]; then
+    if [ ! $(bashio::config 'solcast') ]; then
         sed -i "s*#solcast**g" "$Gen24_Path/cron_file"
     fi
     if [ ! $(bashio::config 'solcast_homeassistant') ]; then
@@ -154,8 +154,9 @@ if [ -f "$Gen24_Path/cron_draft" ]; then
 
 fi
 crontab $Gen24_Path/cron_file
-echo "und los..."
+echo $kennwort
 if [ ! $kennwort="password" ]; then
+    echo "ich starte"
     $Gen24_Path/start_PythonScript.sh http_SymoGen24Controller2.py
 fi
 
