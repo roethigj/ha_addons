@@ -1,5 +1,4 @@
 #!/usr/bin/with-contenv bashio
-echo "ich bin da"
 Gen24_Path="/opt/Gen24_Ladesteuerung"
 
 ip_adresse=$(bashio::config 'fronius.host')
@@ -13,8 +12,6 @@ else
     webserver=0
 fi
     
-    echo $ip_adresse
-
 # Test erster start
 CHECKFILE="/data/first.flag"
 if [ ! -f "$CHECKFILE" ]; then
@@ -27,6 +24,7 @@ else
 fi
 
 # Pfade für ingress anpassen
+echo "Pfade anpassen"
 if [ -f "$Gen24_Path/html/config.php" ]; then
     sed -i -e "s#^\$PythonDIR *= *.*#\$PythonDIR = '$Gen24_Path';#" \
     $Gen24_Path/html/config.php
@@ -38,6 +36,7 @@ find "$Gen24_Path/html" -type f -name "*.php" -print0 | while IFS= read -r -d ''
 done
 
 # Import für python anpassen
+echo "python"
 find "$Gen24_Path/FUNCTIONS" -type f -name "*.py" -print0 | while IFS= read -r -d '' file; do
     sed -i 's#'\''FUNCTIONS.'\''##g' "$file"
 done
@@ -46,6 +45,7 @@ find "$Gen24_Path/ADDONS" -type f -name "*.py" -print0 | while IFS= read -r -d '
 done
 
 # Verlinke Datenbanken und configs
+echo "Datenbanklinks"
 if [ ! -f /data/PV_Daten.sqlite ]; then
     mv $Gen24_Path/PV_Daten.sqlite /data
     ln -s /data/PV_Daten.sqlite $Gen24_Path/
@@ -95,9 +95,10 @@ find "$Gen24_Path/CONFIG" -type f -name "*_priv.ini" -print0 | while IFS= read -
         ln -s "/data/$file" "$Gen24_Path/CONFIG/"
     fi
 done
-
+echo "98"
 
 # CONFIG/default_priv.ini mit Benutzereingaben erzeugen
+
 if [ -f "$Gen24_Path/CONFIG/default_priv.ini" ]; then
     sed -e "s/^hostNameOrIp *= *.*/hostNameOrIp = $ip_adresse/" \
         -e "s/^password *= *.*/password = '$kennwort'/" \
@@ -114,6 +115,8 @@ else
 fi
 
 #Crontab
+echo "crontab"
+
 c_int=$(bashio::config 'scheduler_interval_minutes')
 if [ -f "$Gen24_Path/cron_draft" ]; then
     if [ -f "$Gen24_Path/cron_file" ]; then
@@ -148,6 +151,7 @@ if [ -f "$Gen24_Path/cron_draft" ]; then
 
 fi
 crontab $Gen24_Path/cron_file
+echo "und los..."
 
 $Gen24_Path/start_PythonScript.sh http_SymoGen24Controller2.py
 crond
