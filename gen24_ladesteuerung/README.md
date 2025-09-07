@@ -8,16 +8,19 @@ die Steuerung zyklisch. Optional stellt es die WebUI über Port `2424` bereit (P
 > Hinweis: Das Projekt selbst steht unter GPL-3.0; dieses Add-on verteilt keinen Quellcode des Projekts, sondern klont es zur Laufzeit.
 
 ## Installation (lokales Repository)
-1. Im Add-on-Store rechts oben **⋮ → Repositories** wählen und dieses Verzeichnis als lokales Repository hinzufügen (ZIP entpacken nach `/addons/gen24_ladesteuerung/`).
-2. Add-on installieren und konfigurieren.
-3. Starten. WebUI: `http://homeassistant:2424/`
+1. Im Add-on-Store rechts oben **⋮ → Repositories** wählen und dieses Verzeichnis Repository hinzufügen (https://github.com/roethigj/ha_addons.git).
+2. Add-on installieren und konfigurieren. Hier hier auch die Hinweise von Wiggal beachten (z.B. falls % im Passwort enthalten ist, %% eingeben).
+3. Die Konfiguration des Addons überschreibt die Konfigurationen in den _priv.ini Dateien.
+4. Die Deitails in den  _priv. ini Dateien einstellen.
+5. Starten.
+6. WebUI: `http://homeassistant:2424/`, oder zu Seitenleiste hinzufügen.
 
 ## Optionen
 - `fronius.host`, `fronius.user`, `fronius.password` – Zugangsdaten zum GEN24.
 - `php_webserver` (bool) – Einfachen PHP-Server für die WebUI starten (Default: true).
 - `scheduler_interval_minutes` – Intervall für die Ladesteuerung (Default: 5).
 - `dynamic_price_check` – Stündliche Ausführung von `DynamicPriceCheck.py` (Default: false).
-- `repo_url`, `repo_branch` – Quelle des Projekts (zum Pinnen einer Version/Branch).
+- Auswahl der Wetterdaten-Anbieter
 
 ## Ports
 - 2424/tcp – WebUI (falls aktiviert).
