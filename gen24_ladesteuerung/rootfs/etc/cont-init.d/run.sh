@@ -153,7 +153,7 @@ fi
 crontab $Gen24_Path/cron_file
 echo "und los..."
 
-$Gen24_Path/start_PythonScript.sh http_SymoGen24Controller2.py
+# $Gen24_Path/start_PythonScript.sh http_SymoGen24Controller2.py
 
 echo "crond"
 crond
