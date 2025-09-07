@@ -153,9 +153,8 @@ crontab $Gen24_Path/cron_file
 #if [ ! "$kennwort" = "password" ]; then
 #    $Gen24_Path/start_PythonScript.sh http_SymoGen24Controller2.py
 #fi
-set -e 
-response="$($Gen24_Path/start_PythonScript.sh http_SymoGen24Controller2.py 2>&1 || true)"
-echo "Result - ${response}"
+
+$Gen24_Path/start_PythonScript.sh http_SymoGen24Controller2.py 2>&1
 
 crond
 
