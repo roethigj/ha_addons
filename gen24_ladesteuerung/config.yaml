@@ -33,7 +33,7 @@ options:
   solcast_homeassistant: false
   openmeteo: false
   solarprognose: false
-  scheduler_interval_minutes: 10
+  scheduler_interval_minutes: 5
   fronius:
     host: "192.168.1.50"
     user: "customer"
