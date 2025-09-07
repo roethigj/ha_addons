@@ -86,10 +86,8 @@ find "$Gen24_Path/CONFIG" -type f -name "*_priv.ini" -print0 | while IFS= read -
     file=$(basename "$filepath")   # nur Dateiname ohne Pfad
     if [ ! -f "/data/$file" ]; then
         mv "$filepath" "/data/"
-        ln -s "/data/$file" "$Gen24_Path/CONFIG/"
     else
         rm "$filepath" 
-        ln -s "/data/$file" "$Gen24_Path/CONFIG/"
     fi
 done
 
