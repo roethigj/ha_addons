@@ -11,6 +11,7 @@ ENV GEN24_DIR=/opt/Gen24_Ladesteuerung
 
 COPY rootfs /
 RUN git clone https://github.com/wiggal/GEN24_Ladesteuerung.git /opt/Gen24_Ladesteuerung
+RUN git -C /opt/Gen24_Ladesteuerung pull
 
 COPY first_run.sh /opt/Gen24_Ladesteuerung/
 COPY cron_draft /opt/Gen24_Ladesteuerung/
