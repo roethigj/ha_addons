@@ -22,7 +22,7 @@ map:
   - type: config
     read_only: false
   - type: share
-    readonly: false
+    read_only: false
   - type: addon_config
     read_only: false
     path: /test/addon/config
