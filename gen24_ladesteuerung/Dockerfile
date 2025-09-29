@@ -10,8 +10,10 @@ RUN \
 ENV GEN24_DIR=/opt/Gen24_Ladesteuerung
 
 COPY rootfs /
-RUN git clone https://github.com/wiggal/GEN24_Ladesteuerung.git /opt/Gen24_Ladesteuerung
-RUN git -C /opt/Gen24_Ladesteuerung pull
+RUN url=$(curl -s https://api.github.com/repos/wiggal/GEN24_Ladesteuerung/releases/latest \
+    | jq -r '[.assets[0].browser_download_url,.zipball_url] | map(select(.!=null and .!=""))[0]') && curl -L -N -o /tmp/gen24.zip "$url" \
+    && unzip -o /tmp/gen24.zip -d /tmp \
+    && rm -rf /opt/Gen24_Ladesteuerung && mv /tmp/wiggal-GEN24_Ladesteuerung-* /opt/Gen24_Ladesteuerung
 
 COPY first_run.sh /opt/Gen24_Ladesteuerung/
 COPY cron_draft /opt/Gen24_Ladesteuerung/
