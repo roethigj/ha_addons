@@ -19,13 +19,8 @@ ingress_stream: false
 panel_icon: mdi:solar-power
 init: false
 map:
-  - type: config
-    read_only: false
-  - type: share
-    read_only: false
-  - type: addon_config
-    read_only: false
-    path: /test/addon/config
+  - config:rw
+  - share:rw
 ports:
   2424/tcp: 2424
 webui: "http://[HOST]:[PORT:2424]/"
