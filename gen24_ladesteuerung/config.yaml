@@ -21,7 +21,8 @@ init: false
 map:
   - config:rw
   - share:rw
-  - addon_config:rw
+  - type: addon_config
+    read_only: false
     path: /addon_config
 ports:
   2424/tcp: 2424
