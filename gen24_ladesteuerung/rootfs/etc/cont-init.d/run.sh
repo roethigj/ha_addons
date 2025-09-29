@@ -82,12 +82,9 @@ find "$Gen24_Path/CONFIG" -type f -name "*_priv.ini" -print0 | while IFS= read -
     fi
 done
 
-mkdir -p /config/gen_24
-
 find "/data/" -type f -name "*_priv.ini" -print0 | while IFS= read -r -d '' filepath; do
     file=$(basename "$filepath")   # nur Dateiname ohne Pfad
     ln -s "/data/$file" "$Gen24_Path/CONFIG/"
-    ln -s "/data/$file" "/config/gen_24/"
 done
 
 # CONFIG/default_priv.ini mit Benutzereingaben erzeugen
