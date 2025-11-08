@@ -1,6 +1,7 @@
 #!/usr/bin/with-contenv bashio
 Gen24_Path="/opt/Gen24_Ladesteuerung"
 
+Inverter_Type=$(bashio::config 'fronius.Inverter_Type')
 ip_adresse=$(bashio::config 'fronius.host')
 kennwort=$(bashio::config 'fronius.password')
 user=$(bashio::config 'fronius.user')
@@ -90,7 +91,9 @@ done
 # CONFIG/default_priv.ini mit Benutzereingaben erzeugen
 
 if [ -f "$Gen24_Path/CONFIG/default_priv.ini" ]; then
-    sed -e "s/^hostNameOrIp *= *.*/hostNameOrIp = $ip_adresse/" \
+    sed -e "s/^[gen24]/[inverter]" \
+        -e "s/^InverterTyp *= *.*/InverterTyp = $Inverter_Type/" \
+        -e "s/^hostNameOrIp *= *.*/hostNameOrIp = $ip_adresse/" \
         -e "s/^password *= *.*/password = '$kennwort'/" \
         -e "s/^user *= *.*/user = $user/" \
         -e "s/^battery_capacity_Wh *= *.*/battery_capacity_Wh = $battery_capacity_wh/" \
@@ -145,10 +148,10 @@ fi
 crontab $Gen24_Path/cron_file
 
 #if [ ! "$kennwort" = "password" ]; then
-#    $Gen24_Path/start_PythonScript.sh http_SymoGen24Controller2.py
+#    $Gen24_Path/start_PythonScript.sh EnergyController.py
 #fi
 
-$Gen24_Path/start_PythonScript.sh http_SymoGen24Controller2.py 2>&1
+$Gen24_Path/start_PythonScript.sh EnergyController.py 2>&1
 
 crond
 

@@ -1,5 +1,5 @@
 name: GEN24 Ladesteuerung - wrapper
-version: "0.1.20-ha"
+version: "0.1.30-ha"
 slug: gen24_ladesteuerung
 description: "Wrapper-Add-on für https://github.com/wiggal/GEN24_Ladesteuerung/ (Fronius GEN24 prognosebasierte Akku-Ladesteuerung + WebUI)"
 url: https://github.com/roethigj/ha_addons/tree/main/gen24_ladesteuerung
@@ -35,6 +35,7 @@ options:
   solarprognose: false
   scheduler_interval_minutes: 5
   fronius:
+    Inverter_Type: "gen24"
     host: "192.168.1.50"
     user: "customer"
     password: "password"
@@ -50,6 +51,7 @@ schema:
   solarprognose: bool
   scheduler_interval_minutes: int
   fronius:
+    Inverter_Type: str
     host: str
     user: str
     password: str
