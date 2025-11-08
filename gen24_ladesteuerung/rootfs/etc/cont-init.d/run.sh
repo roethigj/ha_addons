@@ -92,7 +92,7 @@ done
 
 if [ -f "$Gen24_Path/CONFIG/default_priv.ini" ]; then
     sed -e "s/^\[gen24\]/\[inverter\]/" \
-        -e "/ter]/ { /; Inv/! a\; InverterTyp für Fronius Gen24 und Verto = gen24\InverterTyp = $Inverter_Type}" \
+        -e "/ter\]/ { /; Inv/! a\; InverterTyp für Fronius Gen24 und Verto = gen24\InverterTyp = gen24 }" \
         -e "s/^InverterTyp *= *.*/InverterTyp = $Inverter_Type/" \
         -e "s/^hostNameOrIp *= *.*/hostNameOrIp = $ip_adresse/" \
         -e "s/^password *= *.*/password = '$kennwort'/" \
