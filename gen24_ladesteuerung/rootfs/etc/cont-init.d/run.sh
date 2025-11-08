@@ -92,7 +92,6 @@ done
 
 if [ -f "$Gen24_Path/CONFIG/default_priv.ini" ]; then
     sed -e "s/^\[gen24\]/\[inverter\]" \
-        -e "s/^InverterTyp *= *.*/InverterTyp = $Inverter_Type/" \
         -e "s/^hostNameOrIp *= *.*/hostNameOrIp = $ip_adresse/" \
         -e "s/^password *= *.*/password = '$kennwort'/" \
         -e "s/^user *= *.*/user = $user/" \
