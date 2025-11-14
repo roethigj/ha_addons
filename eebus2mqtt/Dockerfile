@@ -26,6 +26,7 @@ RUN addgroup -S app && adduser -S app -G app
 # Persistent storage (HA)
 RUN mkdir -p /app && chown -R app:app /app
 
+VOLUME [ "/data", "/config" ]
 WORKDIR /app
 
 COPY --from=builder /bin/hems-device /usr/local/bin/hems-device
@@ -33,9 +34,7 @@ COPY --from=builder /bin/hems-device /usr/local/bin/hems-device
 COPY run.sh /
 RUN chmod a+x /run.sh
 
-#USER app
 CMD ["/run.sh"]
-#CMD ["/usr/local/bin/hems-device"]
 
 LABEL \   io.hass.type="addon" \    io.hass.arch="aarch64|amd64|armv7"
 
