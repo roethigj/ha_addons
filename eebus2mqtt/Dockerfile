@@ -29,7 +29,7 @@ WORKDIR /app
 
 COPY --from=builder /bin/hems-device /usr/local/bin/hems-device
 
-COPY run.sh /app/run.sh
+COPY ./run.sh /app/run.sh
 #RUN chmod +x /run.sh && chown app:app /run.sh
 
 #USER app
