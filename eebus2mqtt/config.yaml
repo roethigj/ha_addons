@@ -1,5 +1,5 @@
 name: eebus2mqtt
-version: "0.0.0087"
+version: "0.0.0088"
 slug: eebus2mqtt
 description: "MQTT Ausgabe für eebus-Signale einer Steuerbox"
 url: https://github.com/roethigj/ha_addons/tree/main/eebus2mqtt
