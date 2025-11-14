@@ -1,6 +1,6 @@
 {
   "name": "eebus2mqtt",
-  "version": "0.0.0088",
+  "version": "0.0.0089",
   "slug": "eebus2mqtt",
   "description": "MQTT Ausgabe für eebus-Signale einer Steuerbox",
   "url": "https://github.com/roethigj/ha_addons/tree/main/eebus2mqtt",
@@ -18,11 +18,11 @@
   "panel_icon": "mdi:solar-power",
   "init": false,
   "map": [
-  {
-    "type": "addon_config",
-    "path": "/homeassistant/eebus2mqqt",
-    "read_only": false
-  }
+    {
+      "type": "addon_config",
+      "path": "/homeassistant/eebus2mqqt",
+      "read_only": false
+    }
   ],
   "options": {
     "SKI": "Controlbox-SKI-1234",
