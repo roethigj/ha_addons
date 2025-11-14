@@ -29,9 +29,14 @@ WORKDIR /app
 
 COPY --from=builder /bin/hems-device /usr/local/bin/hems-device
 
-COPY ./run.sh /app/run.sh
-RUN chmod +x /app/run.sh && chown app:app /app/run.sh
+COPY run.sh /app/
+#RUN chmod +x /app/run.sh && chown app:app /app/run.sh
 
-USER app
+#USER app
 
+RUN chmod a+x /app/run.sh
 ENTRYPOINT ["/app/run.sh"]
+
+
+LABEL \    io.hass.name="GEN24 Ladesteuerung" \    io.hass.description="Wrapper-Add-on für wiggal/GEN24_Ladesteuerung" \    io.hass.type="addon" \    io.hass.arch="aarch64|amd64|armv7"
+
