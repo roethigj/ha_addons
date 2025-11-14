@@ -19,7 +19,7 @@
   "init": false,
   "map": [
     "config:rw",
-    "share:rw"
+    "data:rw"
   ],
   "options": {
     "SKI": "Controlbox-SKI-1234",
