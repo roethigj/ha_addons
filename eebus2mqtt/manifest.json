@@ -1,0 +1,51 @@
+{
+  "name": "eebus2mqtt",
+  "version": "0.0.001",
+  "slug": "eebus2mqtt",
+  "description": "MQTT Ausgabe für eebus-Signale einer Steuerbox",
+  "url": "https://github.com/roethigj/ha_addons/tree/main/eebus2mqtt",
+  "arch": [
+    "aarch64",
+    "amd64",
+    "armhf",
+    "armv7",
+    "i386"
+  ],
+  "startup": "application",
+  "boot": "auto",
+  "advanced": true,
+  "hassio_api": true,
+  "panel_icon": "mdi:solar-power",
+  "init": false,
+  "map": [
+    "config:rw",
+    "share:rw"
+  ],
+  "options": {
+    "SKI": "Controlbox-SKI-1234",
+    "inverter_max": 10000,
+    "MQTT": {
+      "host": "127.0.0.1",
+      "user": "user",
+      "password": "password"
+    }
+  },
+  "schema": {
+    "SKI": "str",
+    "inverter_max": "int",
+    "MQTT": {
+      "host": "str",
+      "user": "str",
+      "password": "str"
+    }
+  },
+  "options_description": {
+    "SKI": "Identifikationsnummer der Steuerbox (Controlbox-SKI).",
+    "inverter_max": "Maximale Leistung des Wechselrichters in Watt.",
+    "MQTT": {
+      "host": "Hostname oder IP-Adresse des MQTT-Servers.",
+      "user": "Benutzername für den MQTT-Zugang.",
+      "password": "Passwort für den MQTT-Zugang."
+    }
+  }
+}
