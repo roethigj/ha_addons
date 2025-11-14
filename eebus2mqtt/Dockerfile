@@ -1,38 +1,36 @@
-# ===== Stage 1: Build binary =====
-ARG BUILD_FROM=golang:1.21-alpine
+# ===== Stage 1: Go Builder =====
+FROM golang:1.21-alpine AS builder
 
 RUN apk add --no-cache git
 
 WORKDIR /src
 
-# Clone the repository
+# Clone repository
 RUN git clone https://github.com/roethigj/eebus2mqtt .
 
-# Download go dependencies
+# Install dependencies
 RUN go mod download
 
-# Build the binary from devices/hems/main.go
+# Build binary
 RUN go build -o /bin/hems-device ./devices/hems/main.go
 
 
 # ===== Stage 2: Home Assistant Runtime =====
-FROM alpine:3.19
+ARG BUILD_FROM
 FROM ${BUILD_FROM}
 
-
-# Create non-root user
 RUN addgroup -S app && adduser -S app -G app
 
-# Home Assistant persistent storage
+# Persistent storage (HA)
 RUN mkdir -p /data && chown -R app:app /data
 
-# Use /data as working directory → relative paths work correctly
 WORKDIR /data
 
-# Copy the compiled executable
 COPY --from=builder /bin/hems-device /usr/local/bin/hems-device
+
+COPY run.sh /run.sh
+RUN chmod +x /run.sh && chown app:app /run.sh
 
 USER app
 
-# Start application (which will create ./config.json & ./status.log)
 ENTRYPOINT ["/run.sh"]
