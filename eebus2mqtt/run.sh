@@ -15,6 +15,7 @@ if [ -f "$DATA_PATH/config.json" ]; then
   if grep -q "BEGIN CERTIFICATE" "$DATA_PATH/config.json" 2>/dev/null; then
     echo "config.json enthält ein Zertifikat."
   else
+    echo "kein zertifikat gefunden"
     /usr/local/bin/hems-device
   fi
 fi
