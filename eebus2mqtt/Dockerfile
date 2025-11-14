@@ -1,14 +1,16 @@
 # ===== Stage 1: Go Builder =====
-FROM golang:1.21-alpine AS builder
+FROM --platform=$BUILDPLATFORM golang:1.25-alpine AS builder
 
-RUN apk add --no-cache git
+RUN apk update && apk add --no-cache git make patch tzdata ca-certificates && update-ca-certificates
 
 WORKDIR /src
 
 # Clone repository
 RUN git clone https://github.com/roethigj/eebus2mqtt .
 
-# Install dependencies
+# download modules
+COPY go.mod .
+COPY go.sum .
 RUN go mod download
 
 # Build binary
@@ -16,7 +18,7 @@ RUN go build -o /bin/hems-device ./devices/hems/main.go
 
 
 # ===== Stage 2: Home Assistant Runtime =====
-FROM ${BUILD_FROM}
+FROM alpine:3.22
 
 RUN addgroup -S app && adduser -S app -G app
 
