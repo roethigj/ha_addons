@@ -16,7 +16,6 @@ RUN go build -o /bin/hems-device ./devices/hems/main.go
 
 
 # ===== Stage 2: Home Assistant Runtime =====
-ARG BUILD_FROM
 FROM ${BUILD_FROM}
 
 RUN addgroup -S app && adduser -S app -G app
