@@ -30,7 +30,7 @@ WORKDIR /app
 COPY --from=builder /bin/hems-device /usr/local/bin/hems-device
 
 COPY run.sh /
-RUN chmod a+x /app/run.sh
+RUN chmod a+x /run.sh
 
 #USER app
 CMD ["/run.sh"]
