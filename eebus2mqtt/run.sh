@@ -12,15 +12,15 @@ inverter=$(bashio::config 'inverter_max')
 echo $CONFIG_PATH
 echo $mqttBroker
 # CONFIG mit Benutzereingaben erzeugen
-if [ -f "$CONFIG_PATH/config.json" ]; then
+if [ -f "$DATA_PATH/config.json" ]; then
   sed -i \
     -e "s/\"remoteSki\": *\"[^\"]*\"/\"remoteSki\": \"$remote_SKI\"/" \
     -e "s/\"inverter_max\": *\"[^\"]*\"/\"remoteSki\": \"$inverter\"/" \
-    -e "s/"mqttBroker": *\"[^\"]*\"/\"mqttBroker\": \"$mqttBroker\"/" \
+    -e "s/\"mqttBroker\": *\"[^\"]*\"/\"mqttBroker\": \"$mqttBroker\"/" \
     -e "s/\"mqttPort\": *[0-9]*/\"mqttPort\": $mqttPort/" \
     -e "s/\"mqttUsername\": *\"[^\"]*\"/\"mqttUsername\": \"$mqttUser\"/" \
     -e "s/\"mqttPassword\": *\"[^\"]*\"/\"mqttPassword\": \"$mqttPassword\"/" \
-    "$Data_Path/config.json"
+    "$DATA_PATH/config.json"
 fi
 
 # Start Go application
