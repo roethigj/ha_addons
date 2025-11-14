@@ -18,7 +18,7 @@ RUN go build -o /bin/hems-device ./devices/hems/main.go
 
 
 # ===== Stage 2: Home Assistant Runtime =====
-FROM alpine:3.22
+FROM ghcr.io/hassio-addons/base:18.1.4
 
 RUN addgroup -S app && adduser -S app -G app
 
