@@ -8,6 +8,9 @@ mqttUser=$(bashio::config 'MQTT.user')
 mqttPassword=$(bashio::config 'MQTT.password')
 mqttPort=$(bashio::config 'MQTT.port')
 inverter=$(bashio::config 'inverter_max')
+
+echo $CONFIG_PATH
+echo $mqttBroker
 # CONFIG mit Benutzereingaben erzeugen
 if [ -f "$CONFIG_PATH/config.json" ]; then
   sed -i \
