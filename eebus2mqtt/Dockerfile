@@ -23,15 +23,15 @@ FROM alpine:3.22
 RUN addgroup -S app && adduser -S app -G app
 
 # Persistent storage (HA)
-RUN mkdir -p /data && chown -R app:app /data
+#RUN mkdir -p /data && chown -R app:app /data
 
-WORKDIR /data
+WORKDIR /app
 
 COPY --from=builder /bin/hems-device /usr/local/bin/hems-device
 
-COPY run.sh /run.sh
-RUN chmod +x /run.sh && chown app:app /run.sh
+COPY run.sh /app/run.sh
+#RUN chmod +x /run.sh && chown app:app /run.sh
 
-USER app
+#USER app
 
-ENTRYPOINT ["/run.sh"]
+ENTRYPOINT ["/app/run.sh"]

@@ -27,6 +27,7 @@
     "MQTT": {
       "host": "127.0.0.1",
       "user": "user",
+      "port": 1883,
       "password": "password"
     }
   },
@@ -36,6 +37,7 @@
     "MQTT": {
       "host": "str",
       "user": "str",
+      "port": "int",
       "password": "str"
     }
   },
@@ -44,6 +46,7 @@
     "inverter_max": "Maximale Leistung des Wechselrichters in Watt.",
     "MQTT": {
       "host": "Hostname oder IP-Adresse des MQTT-Servers.",
+      "port": "Port des MQTT-Servers",
       "user": "Benutzername für den MQTT-Zugang.",
       "password": "Passwort für den MQTT-Zugang."
     }
