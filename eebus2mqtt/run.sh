@@ -1,5 +1,5 @@
 #!/bin/sh
-CONFIG_PATH="/data/options.json"
+CONFIG_PATH=/data/options.json
 DATA_PATH="/data"
 
 remote_SKI=$(bashio::config 'SKI')
@@ -8,7 +8,6 @@ mqttUser=$(bashio::config 'MQTT.user')
 mqttPassword=$(bashio::config 'MQTT.password')
 mqttPort=$(bashio::config 'MQTT.port')
 inverter=$(bashio::config 'inverter_max')
-echo “Testing this thing!”
 # CONFIG mit Benutzereingaben erzeugen
 if [ -f "$Data_Path/config.json" ]; then
   sed -i \
