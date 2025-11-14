@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bashio
+#!/usr/bin/sh
 CONFIG_PATH="/data/options.json"
 DATA_PATH="/data"
 
