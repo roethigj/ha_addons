@@ -12,7 +12,7 @@ inverter=$(bashio::config 'inverter_max')
 # Start Go application
 /usr/local/bin/hems-device
 if [ -f "$DATA_PATH/config.json" ]; then
-  if grep -q "BEGIN CERTIFICATE" $DATA_PATH/config.json 2>/dev/null; then
+  if grep -q "BEGIN CERTIFICATE" "$DATA_PATH/config.json" 2>/dev/null; then
     echo "config.json enthält ein Zertifikat."
   else
     /usr/local/bin/hems-device
