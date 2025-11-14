@@ -37,7 +37,7 @@ schema:
   inverter_max: int
   MQTT:
     host: str
+    port : int
     user: str
-    port: int
     password: str
 
