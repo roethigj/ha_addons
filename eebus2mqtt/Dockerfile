@@ -7,7 +7,7 @@ WORKDIR /src
 
 # Clone repository
 RUN git clone https://github.com/roethigj/eebus2mqtt .
-RUN git pull /eebus2mqtt
+RUN git pull https://github.com/roethigj/eebus2mqtt
 
 # Install dependencies
 #COPY go.mod .
