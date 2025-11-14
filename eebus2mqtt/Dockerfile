@@ -6,7 +6,9 @@ RUN apk update && apk add --no-cache git make
 WORKDIR /src
 
 # Clone repository
-RUN --no-cache git clone https://github.com/roethigj/eebus2mqtt .
+#RUN git clone https://github.com/roethigj/eebus2mqtt .
+RUN --mount=type=cache,target=/dev/null git clone https://github.com/roethigj/eebus2mqtt .
+
 
 # Install dependencies
 #COPY go.mod .
