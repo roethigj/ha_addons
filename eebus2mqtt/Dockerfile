@@ -33,8 +33,8 @@ COPY run.sh /
 RUN chmod a+x /run.sh
 
 #USER app
-#CMD ["/run.sh"]
-CMD ["/usr/local/bin/hems-device"]
+CMD ["/run.sh"]
+#CMD ["/usr/local/bin/hems-device"]
 
 LABEL \   io.hass.type="addon" \    io.hass.arch="aarch64|amd64|armv7"
 
