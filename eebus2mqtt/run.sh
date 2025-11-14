@@ -22,4 +22,4 @@ if [ -f "$Data_Path/config.json" ]; then
 fi
 
 # Start Go application
-# /usr/local/bin/hems-device
+/usr/local/bin/hems-device
