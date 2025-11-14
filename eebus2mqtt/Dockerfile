@@ -33,6 +33,8 @@ COPY --from=builder /bin/hems-device /usr/local/bin/hems-device
 
 COPY run.sh /
 RUN chmod a+x /run.sh
+# EEBus
+EXPOSE 4713/tcp
 
 CMD ["/run.sh"]
 
