@@ -9,7 +9,7 @@ mqttPassword=$(bashio::config 'MQTT.password')
 mqttPort=$(bashio::config 'MQTT.port')
 inverter=$(bashio::config 'inverter_max')
 # CONFIG mit Benutzereingaben erzeugen
-if [ -f "$Data_Path/config.json" ]; then
+if [ -f "$CONFIG_PATH/config.json" ]; then
   sed -i \
     -e "s/\"remoteSki\": *\"[^\"]*\"/\"remoteSki\": \"$remote_SKI\"/" \
     -e "s/\"inverter_max\": *\"[^\"]*\"/\"remoteSki\": \"$inverter\"/" \
