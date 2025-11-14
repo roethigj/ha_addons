@@ -1,5 +1,6 @@
 #!/usr/bin/with-contenv bashio
-Data_Path="/data"
+CONFIG_PATH="/data/options.json"
+DATA_PATH="/data"
 
 remote_SKI=$(bashio::config 'SKI')
 mqttBroker=$(bashio::config 'MQTT.host')

@@ -35,7 +35,7 @@ RUN chmod a+x /app/run.sh && chown app:app /app/run.sh
 #USER app
 
 RUN chmod a+x /app/run.sh
-ENTRYPOINT ["/app/run.sh"]
+CMD ["/app/run.sh"]
 
 
 LABEL \   io.hass.type="addon" \    io.hass.arch="aarch64|amd64|armv7"
