@@ -19,9 +19,6 @@ if [ -f "$DATA_PATH/config.json" ]; then
   fi
 fi
 
-BEGIN CERTIFICATE
-echo $CONFIG_PATH
-echo $mqttBroker
 # CONFIG mit Benutzereingaben erzeugen
 if [ -f "$DATA_PATH/config.json" ]; then
   sed -i \
