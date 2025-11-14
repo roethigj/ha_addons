@@ -1,6 +1,5 @@
 # ===== Stage 1: Build binary =====
 ARG BUILD_FROM=golang:1.21-alpine
-FROM ${BUILD_FROM} AS builder
 
 RUN apk add --no-cache git
 
@@ -18,6 +17,8 @@ RUN go build -o /bin/hems-device ./devices/hems/main.go
 
 # ===== Stage 2: Home Assistant Runtime =====
 FROM alpine:3.19
+FROM ${BUILD_FROM}
+
 
 # Create non-root user
 RUN addgroup -S app && adduser -S app -G app
