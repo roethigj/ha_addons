@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv bashio
 CONFIG_PATH=/data/options.json
-DATA_PATH="/data"
+DATA_PATH="/config"
 
 remote_SKI=$(bashio::config 'SKI')
 mqttBroker=$(bashio::config 'MQTT.host')
@@ -16,7 +16,7 @@ if [ -f "$CONFIG_PATH/config.json" ]; then
   sed -i \
     -e "s/\"remoteSki\": *\"[^\"]*\"/\"remoteSki\": \"$remote_SKI\"/" \
     -e "s/\"inverter_max\": *\"[^\"]*\"/\"remoteSki\": \"$inverter\"/" \
-    -e "s/\"mqttBroker\": *\"[^\"]*\"/\"mqttBroker\": \"$mqttBroker\"/" \
+    -e "s/"mqttBroker": *\"[^\"]*\"/\"mqttBroker\": \"$mqttBroker\"/" \
     -e "s/\"mqttPort\": *[0-9]*/\"mqttPort\": $mqttPort/" \
     -e "s/\"mqttUsername\": *\"[^\"]*\"/\"mqttUsername\": \"$mqttUser\"/" \
     -e "s/\"mqttPassword\": *\"[^\"]*\"/\"mqttPassword\": \"$mqttPassword\"/" \
