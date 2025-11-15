@@ -1,0 +1,15 @@
+{
+  "hems": {
+    "certFile": "",
+    "keyFile": "",
+    "remoteSki": "",
+    "port": 4713,
+    "inverter_max": 10000
+  },
+  "mqtt": {
+    "mqttBroker": "",
+    "mqttPort": 1883,
+    "mqttUsername": "",
+    "mqttPassword": ""
+  }
+}
