@@ -9,7 +9,7 @@ WORKDIR /src
 #RUN git clone https://github.com/roethigj/eebus2mqtt .
 RUN rm -rf /src/*
 RUN git clone https://github.com/roethigj/eebus2mqtt .
-RUN git -C ./eebus2mqtt pull
+RUN git pull
 
 # Install dependencies
 #COPY go.mod .
