@@ -7,7 +7,7 @@ WORKDIR /src
 
 # Clone repository
 #RUN git clone https://github.com/roethigj/eebus2mqtt .
-RUN rm -rf /src/*
+# RUN rm -rf /src/*
 RUN git clone https://github.com/roethigj/eebus2mqtt .
 RUN git pull
 
