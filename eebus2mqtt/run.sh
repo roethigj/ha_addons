@@ -14,6 +14,7 @@ if [ ! -f "$DATA_PATH/config.json" ]; then
   while true; do
     sleep 1
   done
+fi
 
 cp -n $DATA_PATH/config.draft $DATA_PATH/config.json
 
