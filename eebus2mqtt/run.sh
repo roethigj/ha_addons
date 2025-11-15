@@ -21,7 +21,7 @@ else
     echo "keine config angelegt"
     /usr/local/bin/hems-device
 fi
-while [ !(-f "$DATA_PATH/config.json") ]; do
+while [ ! -f "$DATA_PATH/config.json" ]; do
     sleep 1
     echo "warte auf config"
 done
