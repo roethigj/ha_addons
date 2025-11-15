@@ -17,6 +17,9 @@ if [ -f "$DATA_PATH/config.json" ]; then
     echo "kein zertifikat gefunden"
     /usr/local/bin/hems-device
   fi
+else
+    echo "keine config angelegt"
+    /usr/local/bin/hems-device
 fi
 
 # CONFIG mit Benutzereingaben erzeugen
