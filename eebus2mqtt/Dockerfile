@@ -22,15 +22,20 @@ RUN go build -o /bin/hems-device ./devices/hems/main.go
 # ===== Stage 2: Home Assistant Runtime =====
 FROM ghcr.io/hassio-addons/base:18.1.4
 
+RUN addgroup -S app && adduser -S app -G app
 
+# Persistent storage (HA)
+RUN mkdir -p /app && chown -R app:app /app
+RUN mkdir -p /config && chown -R app:app /config
 VOLUME [ "/data", "/config" ]
-# WORKDIR /app
+WORKDIR /app
 
 COPY --from=builder /bin/hems-device /usr/local/bin/hems-device
 
 COPY run.sh /
 RUN chmod a+x /run.sh
-COPY config.draft /config/
+
+COPY config.draft /config/config.draft
 # EEBus
 EXPOSE 4713/tcp
 
