@@ -8,23 +8,8 @@ mqttUser=$(bashio::config 'MQTT.user')
 mqttPassword=$(bashio::config 'MQTT.password')
 mqttPort=$(bashio::config 'MQTT.port')
 inverter=$(bashio::config 'inverter_max')
-
-# Start Go application
-if [ -f "$DATA_PATH/config.json" ]; then
-  if grep -q "BEGIN CERTIFICATE" "$DATA_PATH/config.json" 2>/dev/null; then
-    echo "config.json enthält ein Zertifikat."
-  else
-    echo "kein zertifikat gefunden"
-    /usr/local/bin/hems-device
-  fi
-else
-    echo "keine config angelegt"
-    /usr/local/bin/hems-device
-fi
-while [ ! -f "$DATA_PATH/config.json" ]; do
-    sleep 1
-    echo "warte auf config"
-done
+// copy cofig, if nothing there
+cp -n $DATA_PATH/config.draft $DATA_PATH/config.json
 
 # CONFIG mit Benutzereingaben erzeugen
 if [ -f "$DATA_PATH/config.json" ]; then
