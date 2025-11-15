@@ -1,5 +1,4 @@
 #!/usr/bin/with-contenv bashio
-CONFIG_PATH=/data/options.json
 DATA_PATH="/config"
 
 remote_SKI=$(bashio::config 'SKI')
@@ -16,7 +15,7 @@ if [ ! -f "$DATA_PATH/config.json" ]; then
   done
 fi
 
-cp -n $DATA_PATH/config.draft $DATA_PATH/config.json
+cp -n /config.draft $DATA_PATH/config.json
 
 # CONFIG mit Benutzereingaben erzeugen
 if [ -f "$DATA_PATH/config.json" ]; then

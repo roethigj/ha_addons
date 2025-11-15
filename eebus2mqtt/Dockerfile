@@ -35,7 +35,7 @@ COPY --from=builder /bin/hems-device /usr/local/bin/hems-device
 COPY run.sh /
 RUN chmod a+x /run.sh
 
-COPY config.draft /config/config.draft
+COPY config.draft /config.draft
 # EEBus
 EXPOSE 4713/tcp
 
