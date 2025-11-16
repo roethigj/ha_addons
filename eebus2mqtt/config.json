@@ -1,6 +1,6 @@
 {
   "name": "eebus2mqtt",
-  "version": "0.0.00149",
+  "version": "0.0.00150",
   "slug": "eebus2mqtt",
   "description": "MQTT Ausgabe für eebus-Signale einer Steuerbox",
   "url": "https://github.com/roethigj/ha_addons/tree/main/eebus2mqtt",
@@ -17,7 +17,7 @@
   "hassio_api": true,
   "host_network": true,
   "panel_icon": "mdi:solar-power",
-  "init": true,
+  "init": false,
   "map": [
     {
       "type": "addon_config",
