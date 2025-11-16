@@ -18,6 +18,7 @@ RUN git pull
 RUN go mod download
 
 # Build binary
+# If source changed ...
 RUN git pull
 
 RUN go build -o /bin/hems-device ./devices/hems/main.go
