@@ -6,9 +6,9 @@ RUN apk update && apk add --no-cache git make
 WORKDIR /src
 
 # Clone repository
-#RUN git clone https://github.com/roethigj/eebus2mqtt .
-RUN rm -rf /src/*
-RUN git clone --no-hardlinks https://github.com/roethigj/eebus2mqtt .
+RUN git clone https://github.com/roethigj/eebus2mqtt .
+#RUN rm -rf /src/*
+#RUN git clone --no-hardlinks https://github.com/roethigj/eebus2mqtt .
 # RUN git pull
 
 # Install dependencies
@@ -32,7 +32,7 @@ RUN addgroup -S app && adduser -S app -G app
 # Persistent storage (HA)
 RUN mkdir -p /app && chown -R app:app /app
 RUN mkdir -p /config && chown -R app:app /config
-VOLUME [ "/data", "/config" ]
+# VOLUME [ "/data", "/config" ]
 WORKDIR /app
 
 COPY --from=builder /bin/hems-device /usr/local/bin/hems-device

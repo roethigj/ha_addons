@@ -14,7 +14,7 @@ cp -n /config.draft $DATA_PATH/config.json
 if [ -f "$DATA_PATH/config.json" ]; then
   sed -i \
     -e "s/\"remoteSki\": *\"[^\"]*\"/\"remoteSki\": \"$remote_SKI\"/" \
-    -e "s/\"pv_max\": *\"[^\"]*\"/\"pv_max\": \"$pv_max\"/" \
+    -e "s/\"pv_max\": *[0-9]*/\"/\"pv_max\": \"$pv_max\"/" \
     -e "s/\"mqttBroker\": *\"[^\"]*\"/\"mqttBroker\": \"$mqttBroker\"/" \
     -e "s/\"mqttPort\": *[0-9]*/\"mqttPort\": $mqttPort/" \
     -e "s/\"mqttUsername\": *\"[^\"]*\"/\"mqttUsername\": \"$mqttUser\"/" \
