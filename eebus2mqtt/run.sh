@@ -7,8 +7,9 @@ mqttUser=$(bashio::config 'MQTT.user')
 mqttPassword=$(bashio::config 'MQTT.password')
 mqttPort=$(bashio::config 'MQTT.port')
 pv_max=$(bashio::config 'pv_max')
-# copy config, if nothing there
+# copy config, log if nothing there
 cp -n /config.draft $DATA_PATH/config.json
+cp -n /config.draft $DATA_PATH/status.log
 
 # CONFIG mit Benutzereingaben erzeugen
 if [ -f "$DATA_PATH/config.json" ]; then
