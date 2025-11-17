@@ -9,7 +9,7 @@ WORKDIR /src
 #RUN git clone https://github.com/roethigj/eebus2mqtt .
 RUN rm -rf /src/*
 RUN git clone --no-hardlinks https://github.com/roethigj/eebus2mqtt .
-# RUN git pull
+RUN git pull
 
 # Install dependencies
 #COPY go.mod .
@@ -18,8 +18,6 @@ RUN git clone --no-hardlinks https://github.com/roethigj/eebus2mqtt .
 RUN go mod download
 
 # Build binary
-# If source changed ...
-# RUN git pull
 
 RUN go build -o /bin/hems-device ./devices/hems/main.go
 
