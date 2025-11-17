@@ -1,6 +1,6 @@
 {
   "name": "eebus2mqtt",
-  "version": "0.0.0023",
+  "version": "0.0.0025",
   "slug": "eebus2mqtt",
   "description": "MQTT Ausgabe für eebus-Signale einer Steuerbox",
   "url": "https://github.com/roethigj/ha_addons/tree/main/eebus2mqtt",
@@ -27,7 +27,7 @@
   ],
   "options": {
     "SKI": "Controlbox-SKI-1234",
-    "inverter_max": 10000,
+    "pvmax": 10000,
     "MQTT": {
       "host": "127.0.0.1",
       "user": "user",
@@ -37,7 +37,7 @@
   },
   "schema": {
     "SKI": "str",
-    "inverter_max": "int",
+    "pv_max": "int",
     "MQTT": {
       "host": "str",
       "user": "str",
@@ -47,7 +47,7 @@
   },
   "options_description": {
     "SKI": "Identifikationsnummer der Steuerbox (Controlbox-SKI).",
-    "inverter_max": "Maximale Leistung des Wechselrichters in Watt.",
+    "pv_max": "Maximale Leistung der PV  in WattPeak.",
     "MQTT": {
       "host": "Hostname oder IP-Adresse des MQTT-Servers.",
       "port": "Port des MQTT-Servers",

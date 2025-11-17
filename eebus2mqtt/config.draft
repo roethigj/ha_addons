@@ -4,7 +4,7 @@
     "keyFile": "",
     "remoteSki": "",
     "port": 4713,
-    "inverter_max": 10000
+    "pv_max": 10000
   },
   "mqtt": {
     "mqttBroker": "",

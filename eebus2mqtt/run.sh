@@ -6,7 +6,7 @@ mqttBroker=$(bashio::config 'MQTT.host')
 mqttUser=$(bashio::config 'MQTT.user')
 mqttPassword=$(bashio::config 'MQTT.password')
 mqttPort=$(bashio::config 'MQTT.port')
-inverter=$(bashio::config 'inverter_max')
+pv_ma=$(bashio::config 'pv_max')
 # copy config, if nothing there
 cp -n /config.draft $DATA_PATH/config.json
 
@@ -14,7 +14,7 @@ cp -n /config.draft $DATA_PATH/config.json
 if [ -f "$DATA_PATH/config.json" ]; then
   sed -i \
     -e "s/\"remoteSki\": *\"[^\"]*\"/\"remoteSki\": \"$remote_SKI\"/" \
-    -e "s/\"inverter_max\": *\"[^\"]*\"/\"remoteSki\": \"$inverter\"/" \
+    -e "s/\"pv_max\": *\"[^\"]*\"/\"pv_max\": \"$pv_max\"/" \
     -e "s/\"mqttBroker\": *\"[^\"]*\"/\"mqttBroker\": \"$mqttBroker\"/" \
     -e "s/\"mqttPort\": *[0-9]*/\"mqttPort\": $mqttPort/" \
     -e "s/\"mqttUsername\": *\"[^\"]*\"/\"mqttUsername\": \"$mqttUser\"/" \
