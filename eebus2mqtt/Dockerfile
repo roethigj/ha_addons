@@ -8,8 +8,8 @@ WORKDIR /src
 # Clone repository
 #RUN git clone https://github.com/roethigj/eebus2mqtt .
 RUN rm -rf /src/*
-RUN git force-clone https://github.com/roethigj/eebus2mqtt .
-RUN git pull
+RUN git clone --no-hardlinks https://github.com/roethigj/eebus2mqtt .
+# RUN git pull
 
 # Install dependencies
 #COPY go.mod .
