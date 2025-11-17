@@ -22,12 +22,12 @@
     {
       "type": "addon_config",
       "path": "/config",
-      "read_only": false
+      "read_only": false,
     },
     {
       "type": "addon_data",
       "path": "/data",
-      "read_only": false
+      "read_only": false,
     }
   ],
   "options": {
