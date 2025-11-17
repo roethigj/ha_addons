@@ -1,6 +1,6 @@
 {
   "name": "eebus2mqtt",
-  "version": "0.0.004",
+  "version": "0.0.003",
   "slug": "eebus2mqtt",
   "description": "MQTT Ausgabe für eebus-Signale einer Steuerbox",
   "url": "https://github.com/roethigj/ha_addons/tree/main/eebus2mqtt",
@@ -22,7 +22,9 @@
     {
       "type": "addon_config",
       "path": "/config",
-      "read_only": false,
+      "read_only": false
+    },
+    {
       "type": "addon_data",
       "path": "/data",
       "read_only": false
