@@ -6,7 +6,7 @@ mqttBroker=$(bashio::config 'MQTT.host')
 mqttUser=$(bashio::config 'MQTT.user')
 mqttPassword=$(bashio::config 'MQTT.password')
 mqttPort=$(bashio::config 'MQTT.port')
-pv_ma=$(bashio::config 'pv_max')
+pv_max=$(bashio::config 'pv_max')
 # copy config, if nothing there
 cp -n /config.draft $DATA_PATH/config.json
 

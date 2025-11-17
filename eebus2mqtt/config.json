@@ -1,6 +1,6 @@
 {
   "name": "eebus2mqtt",
-  "version": "0.0.0025",
+  "version": "0.0.0026",
   "slug": "eebus2mqtt",
   "description": "MQTT Ausgabe für eebus-Signale einer Steuerbox",
   "url": "https://github.com/roethigj/ha_addons/tree/main/eebus2mqtt",
@@ -27,7 +27,7 @@
   ],
   "options": {
     "SKI": "Controlbox-SKI-1234",
-    "pvmax": 10000,
+    "pv_max": 10000,
     "MQTT": {
       "host": "127.0.0.1",
       "user": "user",
