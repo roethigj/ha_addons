@@ -69,7 +69,7 @@ else
 fi
 
 if [ ! -f $Gen24_Path/CONFIG/config.ini_priv]; then
-  cp $Gen24_Path/html/config.ini $Gen24_Path/config/config.ini_priv
+  cp $Gen24_Path/html/config.ini $Gen24_Path/CONFIG/config.ini_priv
   ln -s $Gen24_Path/CONFIG/config.ini_priv $Gen24_Path/html/
 else
     ln -s $Gen24_Path/CONFIG/config.ini_priv $Gen24_Path/html/
