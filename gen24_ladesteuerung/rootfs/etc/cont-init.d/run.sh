@@ -68,6 +68,8 @@ else
     ln -s /data/Prog_Steuerung.sqlite $Gen24_Path/CONFIG/
 fi
 
+ln -s $Gen24_Path/CONFIG/config.ini_priv $Gen24_Path/html
+
 if "$(bashio::config 'dynamic_price_check')"; then
     if [ ! -f /data/dynprice_priv.ini ]; then
         if [ ! -f $Gen24_Path/CONFIG/dynprice_priv.ini ]; then

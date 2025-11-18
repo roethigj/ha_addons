@@ -19,3 +19,5 @@ cp -n $Gen24_Path/CONFIG/charge.ini $Gen24_Path/CONFIG/charge_priv.ini
 cp -n $Gen24_Path/CONFIG/default.ini $Gen24_Path/CONFIG/default_priv.ini
 cp -n $Gen24_Path/CONFIG/weather.ini $Gen24_Path/CONFIG/weather_priv.ini
 cp -n $Gen24_Path/CONFIG/dynprice.ini $Gen24_Path/CONFIG/dynprice_priv.ini
+cp -n $Gen24_Path/html/config.ini $Gen24_Path/CONFIG/config_priv.ini
+
