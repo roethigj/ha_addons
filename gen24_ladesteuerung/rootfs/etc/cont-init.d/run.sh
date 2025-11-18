@@ -68,7 +68,7 @@ else
     ln -s /data/Prog_Steuerung.sqlite $Gen24_Path/CONFIG/
 fi
 
-if [ ! -f $Gen24_Path/CONFIG/config_priv.ini]; then
+if [ ! -f $Gen24_Path/CONFIG/config_priv.ini ]; then
   cp $Gen24_Path/html/config.ini $Gen24_Path/CONFIG/config_priv.ini
   ln $Gen24_Path/CONFIG/config_priv.ini $Gen24_Path/html/config_priv.ini
 else
