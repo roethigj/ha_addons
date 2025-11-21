@@ -4,7 +4,10 @@
     "keyFile": "",
     "remoteSki": "",
     "port": 4713,
-    "pv_max": 10000
+    "pv_max": 10000,
+    "failsafe": "",
+    failsafe_duration: "",
+    "serial_number": ""
   },
   "mqtt": {
     "mqttBroker": "",

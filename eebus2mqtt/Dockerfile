@@ -1,5 +1,14 @@
+ARG BUILD_FROM, BUILD_ARCH
+FROM $BUILD_FROM
 # ===== Stage 1: Go Builder =====
 FROM --platform=$BUILDPLATFORM golang:1.25-alpine AS builder
+
+RUN echo $BUILD_FROM
+RUN echo $BUILDPLATFORM
+RUN echo $BUILD_ARCH
+
+
+
 
 RUN apk update && apk add --no-cache git make
 
@@ -24,6 +33,7 @@ RUN go build -o /bin/hems-device ./devices/hems/main.go
 FROM ghcr.io/hassio-addons/base:18.1.4
 
 RUN addgroup -S app && adduser -S app -G app
+
 
 # Persistent storage (HA)
 RUN mkdir -p /app && chown -R app:app /app
