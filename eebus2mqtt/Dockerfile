@@ -1,8 +1,7 @@
 ARG BUILD_FROM
-ARG BUILD_ARCH
 FROM $BUILD_FROM
 # ===== Stage 1: Go Builder =====
-#FROM --platform=$BUILDPLATFORM golang:1.25-alpine AS builder
+FROM --platform=$BUILDPLATFORM golang:1.25-alpine AS builder
 
 #RUN echo $BUILD_FROM
 #RUN echo $BUILDPLATFORM
