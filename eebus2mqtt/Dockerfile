@@ -28,10 +28,10 @@ WORKDIR /src
 
 RUN echo "$BUILD_ARCH"
 RUN \
-  if [ "${BUILD_ARCH}" = "aarch64" ]; then  \
+  if [ "${BUILD_ARCH}" = "linux/arm64" ]; then  \
   wget https://raw.githubusercontent.com/roethigj/eebus2mqtt/main/build/hems_aarch64 && \
   cp hems_aarch64 /bin/hems-device; \
-  elif [ "${BUILD_ARCH}" = "amd64" ]; then  \
+  elif [ "${BUILD_ARCH}" = "linux/amd64" ]; then  \
   wget https://raw.githubusercontent.com/roethigj/eebus2mqtt/main/build/hems_amd64 && \
   cp hems_amd64 /bin/hems-device; \
   fi
