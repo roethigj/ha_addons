@@ -30,19 +30,14 @@ ARG BUILD_ARCH
 ARG TARGETARCH
 ARG TARGETPLATFORM
 
-RUN echo "Unsupported architecture: ${TARGETARCH} "
-RUN echo "Unsupported build: ${BUILD_ARCH} "
-RUN echo "Unsupported platt: $TARGETPLATFORM"
-
 RUN \
-  #if [  "${BUILD_ARCH}" = "aarch64" ]; then \
+  if [  "${TARGETARCH}" = "arm64" ]; then \
   wget https://raw.githubusercontent.com/roethigj/eebus2mqtt/main/build/hems_aarch64 && \
-  cp hems_aarch64 /bin/hems-device;
-  #\
-  #elif [ "${BUILD_ARCH}" = "amd64" ]; then \
-  #wget https://raw.githubusercontent.com/roethigj/eebus2mqtt/main/build/hems_amd64 && \
-  #cp hems_amd64 /bin/hems-device; \
-  #fi
+  cp hems_aarch64 /bin/hems-device; \
+  elif [ "${TARGETARCH}" = "amd64" ]; then \
+  wget https://raw.githubusercontent.com/roethigj/eebus2mqtt/main/build/hems_amd64 && \
+  cp hems_amd64 /bin/hems-device; \
+  fi
 
 # ===== Stage 2: Home Assistant Runtime =====
 FROM ghcr.io/hassio-addons/base:18.1.4
@@ -57,7 +52,7 @@ RUN mkdir -p /config && chown -R app:app /config
 WORKDIR /app
 
 COPY --from=builder /bin/hems-device /usr/local/bin/hems-device
-RUN fehler
+
 COPY run.sh /
 RUN chmod a+x /run.sh
 RUN chmod a+x /usr/local/bin/hems-device
@@ -67,4 +62,4 @@ EXPOSE 4713/tcp
 
 CMD ["/run.sh"]
 
-LABEL \   io.hass.type="addon" \    io.hass.arch="aarch64|amd64|armv7"
+LABEL \   io.hass.type="addon" \    io.hass.arch="aarch64|amd64"
