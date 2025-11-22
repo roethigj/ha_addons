@@ -27,7 +27,9 @@ WORKDIR /src
 
 #RUN go build -o /bin/hems-device ./devices/hems/main.go
 
-RUN echo "Unsupported architecture: ${TARGETARCH} build: ${BUILD_ARCH} platt: $TARGETPLATFORM"
+RUN echo "Unsupported architecture: ${TARGETARCH} "
+RUN echo "Unsupported build: ${BUILD_ARCH} "
+RUN echo "Unsupported platt: $TARGETPLATFORM"
 
 RUN \
   #if [  "${BUILD_ARCH}" = "aarch64" ]; then \
