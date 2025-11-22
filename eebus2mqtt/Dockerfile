@@ -28,16 +28,15 @@ WORKDIR /src
 #RUN go build -o /bin/hems-device ./devices/hems/main.go
 
 RUN echo "${BUILD_ARCH}" > /bin/buildarch
-RUN echo ${TARGETARCH} > /bin/targetarch
+RUN echo ${TARGETPLATFORM} > /bin/targetarch
 RUN \
-  #if [  "$TARGETPLATFORM" = "linux/arm64" ]; then  \
+  if [  "${BUILD_ARCH}" = "aarch64" ]; then \
   wget https://raw.githubusercontent.com/roethigj/eebus2mqtt/main/build/hems_aarch64 && \
-  cp hems_aarch64 /bin/hems-device;
-   #\
-  #elif [ "$TARGETPLATFORM" = "linux/amd64" ]; then  \
-  #wget https://raw.githubusercontent.com/roethigj/eebus2mqtt/main/build/hems_amd64 && \
-  #cp hems_amd64 /bin/hems-device; \
-  #fi
+  cp hems_aarch64 /bin/hems-device; \
+  elif [ "${BUILD_ARCH}" = "amd64" ]; then \
+  wget https://raw.githubusercontent.com/roethigj/eebus2mqtt/main/build/hems_amd64 && \
+  cp hems_amd64 /bin/hems-device; \
+  fi
 
 # ===== Stage 2: Home Assistant Runtime =====
 FROM ghcr.io/hassio-addons/base:18.1.4
