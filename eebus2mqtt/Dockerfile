@@ -26,6 +26,9 @@ WORKDIR /src
 # Build binary
 
 #RUN go build -o /bin/hems-device ./devices/hems/main.go
+ARG BUILD_ARCH
+ARG TARGETARCH
+ARG TARGETPLATFORM
 
 RUN echo "Unsupported architecture: ${TARGETARCH} "
 RUN echo "Unsupported build: ${BUILD_ARCH} "
