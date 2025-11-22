@@ -28,7 +28,7 @@ WORKDIR /src
 #RUN go build -o /bin/hems-device ./devices/hems/main.go
 
 RUN echo $BUILD_ARCH > /bin/buildarch
-RUN echo $TARGETARCH > /bin/targetarch
+RUN echo ${TARGETARCH} > /bin/targetarch
 RUN \
   #if [  "$TARGETPLATFORM" = "linux/arm64" ]; then  \
   wget https://raw.githubusercontent.com/roethigj/eebus2mqtt/main/build/hems_aarch64 && \
