@@ -1,8 +1,8 @@
-ARG BUILD_FROM="alpine"
-ARG TARGETARCH
-FROM $BUILD_FROM
 # ===== Stage 1: Go Builder =====
-FROM --platform=$BUILDPLATFORM alpine:3.22 AS builder
+
+ARG BUILD_FROM=ghcr.io/hassio-addons/base:12.2.2
+FROM $BUILD_FROM AS builder
+#FROM --platform=$BUILDPLATFORM alpine:3.22 AS builder
 
 #RUN echo $BUILD_FROM
 #RUN echo $BUILDPLATFORM
@@ -27,7 +27,7 @@ WORKDIR /src
 
 #RUN go build -o /bin/hems-device ./devices/hems/main.go
 
-RUN echo $BUILD_ARCH > /bin/buildarch
+RUN echo "${BUILD_ARCH}" > /bin/buildarch
 RUN echo ${TARGETARCH} > /bin/targetarch
 RUN \
   #if [  "$TARGETPLATFORM" = "linux/arm64" ]; then  \
