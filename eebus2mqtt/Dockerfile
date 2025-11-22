@@ -27,8 +27,7 @@ WORKDIR /src
 
 #RUN go build -o /bin/hems-device ./devices/hems/main.go
 
-RUN echo "${BUILD_ARCH}" > /bin/buildarch
-RUN echo "Unsupported architecture: ${TARGETARCH}"
+RUN echo "Unsupported architecture: ${TARGETARCH} build: ${BUILD_ARCH} platt: $TARGETPLATFORM"
 
 RUN \
   #if [  "${BUILD_ARCH}" = "aarch64" ]; then \
@@ -53,10 +52,6 @@ RUN mkdir -p /config && chown -R app:app /config
 WORKDIR /app
 
 COPY --from=builder /bin/hems-device /usr/local/bin/hems-device
-COPY --from=builder /bin/buildarch /buildarch
-COPY --from=builder /bin/targetarch /targetarch
-
-
 
 COPY run.sh /
 RUN chmod a+x /run.sh
