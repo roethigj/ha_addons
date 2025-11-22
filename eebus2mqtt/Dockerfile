@@ -52,7 +52,7 @@ RUN mkdir -p /config && chown -R app:app /config
 WORKDIR /app
 
 COPY --from=builder /bin/hems-device /usr/local/bin/hems-device
-
+RUN fehler
 COPY run.sh /
 RUN chmod a+x /run.sh
 RUN chmod a+x /usr/local/bin/hems-device
