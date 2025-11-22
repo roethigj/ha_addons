@@ -1,4 +1,5 @@
 ARG BUILD_FROM="alpine"
+ARG TARGETARCH
 FROM $BUILD_FROM
 # ===== Stage 1: Go Builder =====
 FROM --platform=$BUILDPLATFORM alpine:3.22 AS builder
@@ -27,7 +28,7 @@ WORKDIR /src
 #RUN go build -o /bin/hems-device ./devices/hems/main.go
 
 RUN echo $BUILD_ARCH > /bin/buildarch
-RUN echo $TARGETPLATFORM > /bin/targetarch
+RUN echo $TARGETARCH > /bin/targetarch
 RUN \
   #if [  "$TARGETPLATFORM" = "linux/arm64" ]; then  \
   wget https://raw.githubusercontent.com/roethigj/eebus2mqtt/main/build/hems_aarch64 && \
