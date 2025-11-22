@@ -2,31 +2,40 @@ ARG BUILD_FROM
 ARG BUILD_ARCH
 FROM $BUILD_FROM
 # ===== Stage 1: Go Builder =====
-FROM --platform=$BUILDPLATFORM golang:1.25-alpine AS builder
+#FROM --platform=$BUILDPLATFORM golang:1.25-alpine AS builder
 
-RUN echo $BUILD_FROM
-RUN echo $BUILDPLATFORM
-RUN echo $BUILD_ARCH
+#RUN echo $BUILD_FROM
+#RUN echo $BUILDPLATFORM
+#RUN echo $BUILD_ARCH
 
-RUN apk update && apk add --no-cache git make
+#RUN apk update && apk add --no-cache git make
 
 WORKDIR /src
 # Clone repository
 #RUN git clone https://github.com/roethigj/eebus2mqtt .
-RUN rm -rf /src/*
-RUN git clone --no-hardlinks https://github.com/roethigj/eebus2mqtt .
-RUN git pull
+#RUN rm -rf /src/*
+#RUN git clone --no-hardlinks https://github.com/roethigj/eebus2mqtt .
+#RUN git pull
 
 # Install dependencies
 #COPY go.mod .
 #COPY go.sum .RUN git pull https://github.com/roethigj/eebus2mqtt
 
-RUN go mod download
+#RUN go mod download
 
 # Build binary
 
-RUN go build -o /bin/hems-device ./devices/hems/main.go
+#RUN go build -o /bin/hems-device ./devices/hems/main.go
 
+RUN echo "$BUILD_ARCH"
+RUN \
+  if [ "${BUILD_ARCH}" = "arm64" ]; then  \
+  wget https://github.com/roethigj/eebus2mqtt/tree/main/build/hems_aarch64 && \
+  cp hems_aarch64 /bin/hems-device; \
+  elif [ "${BUILD_ARCH}" = "amd64" ]; then  \
+  wget https://github.com/roethigj/eebus2mqtt/tree/main/build/hems_amd64 && \
+  cp hems_amd64 /bin/hems-device; \
+  fi
 
 # ===== Stage 2: Home Assistant Runtime =====
 FROM ghcr.io/hassio-addons/base:18.1.4
