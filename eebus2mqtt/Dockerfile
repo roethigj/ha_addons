@@ -8,7 +8,7 @@ FROM $BUILD_FROM AS builder
 #RUN echo $BUILDPLATFORM
 #RUN echo $BUILD_ARCH
 
-#RUN apk update && apk add --no-cache git make
+RUN apk update && apk add --no-cache git make
 
 WORKDIR /src
 # Clone repository
