@@ -6,7 +6,9 @@
     "port": 4713,
     "pv_max": 10000,
     "failsafe": "",
-    failsafe_duration: "",
+    "failsafe_duration": "",
+    "failsafe_lpc": "",
+    "failsafe_duration_lpc": "",
     "serial_number": ""
   },
   "mqtt": {
