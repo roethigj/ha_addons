@@ -17,8 +17,6 @@ RUN url=$(curl -s https://api.github.com/repos/wiggal/GEN24_Ladesteuerung/releas
 
 COPY first_run.sh /opt/Gen24_Ladesteuerung/
 COPY cron_draft /opt/Gen24_Ladesteuerung/
-COPY ingress.conf /etc/nginx/http.d/
-
 
 RUN chmod a+x /opt/Gen24_Ladesteuerung/start_PythonScript.sh 
 RUN chmod a+x /opt/Gen24_Ladesteuerung/first_run.sh 
