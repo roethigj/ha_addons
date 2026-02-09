@@ -25,6 +25,6 @@ RUN chmod a+x /opt/Gen24_Ladesteuerung/first_run.sh
 RUN chmod a+x /etc/cont-init.d/run.sh
 
 LABEL \    io.hass.name="GEN24 Ladesteuerung" \    io.hass.description="Wrapper-Add-on für wiggal/GEN24_Ladesteuerung" \    io.hass.type="addon" \    io.hass.arch="aarch64|amd64|armv7"
-CMD [ "nginx","-g","daemon off;error_log /dev/stdout debug;" ]
+
 
 
