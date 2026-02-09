@@ -25,20 +25,20 @@ else
 fi
 
 # Pfade für ingress anpassen
-if [ -f "$Gen24_Path/html/config.php" ]; then
-    sed -i -e "s#^\$PythonDIR *= *.*#\$PythonDIR = '$Gen24_Path';#" \
-    $Gen24_Path/html/config.php
-fi
+#if [ -f "$Gen24_Path/html/config.php" ]; then
+#    sed -i -e "s#^\$PythonDIR *= *.*#\$PythonDIR = '$Gen24_Path';#" \
+#    $Gen24_Path/html/config.php
+#fi
 
-if [ -f "$Gen24_Path/html/6_tab_GEN24.php" ]; then
-    sed -i -e "s/http/https/g" \
-    $Gen24_Path/html/6_tab_GEN24.php
-fi
+#if [ -f "$Gen24_Path/html/6_tab_GEN24.php" ]; then
+#    sed -i -e "s/http/https/g" \
+#    $Gen24_Path/html/6_tab_GEN24.php
+#fi
 
-find "$Gen24_Path/html" -type f -name "*.php" -print0 | while IFS= read -r -d '' file; do
-    sed -i 's#'\''.\$_SERVER\["PHP_SELF"\].'\''##g' "$file"
-    sed -i "s#urlencode(\$_SERVER\['REQUEST_URI'\])#substr(\$_SERVER['REQUEST_URI'], 1)#g" "$file"
-done
+#find "$Gen24_Path/html" -type f -name "*.php" -print0 | while IFS= read -r -d '' file; do
+#    sed -i 's#'\''.\$_SERVER\["PHP_SELF"\].'\''##g' "$file"
+#    sed -i "s#urlencode(\$_SERVER\['REQUEST_URI'\])#substr(\$_SERVER['REQUEST_URI'], 1)#g" "$file"
+#done
 
 # Import für python anpassen
 find "$Gen24_Path/FUNCTIONS" -type f -name "*.py" -print0 | while IFS= read -r -d '' file; do
