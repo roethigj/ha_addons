@@ -1,7 +1,7 @@
 server {
     listen 8024;
 
-    location / {
+    location /device/ {
         proxy_pass http://__TARGET_HOST__/;
         proxy_http_version 1.1;
 
