@@ -25,25 +25,32 @@ if ($host === '') {
     die('hostNameOrIp nicht gefunden');
 }
 
-/* Ziel-URL (bewusst nur HTTP!) */
+/* Ziel-URL (NUR http) */
 $targetUrl = "http://$host/";
 
-/* Minimaler Proxy */
-$ch = curl_init($targetUrl);
-curl_setopt_array($ch, [
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_FOLLOWLOCATION => true,
-    CURLOPT_CONNECTTIMEOUT => 5,
-    CURLOPT_TIMEOUT        => 10,
+/* HTTP-Context */
+$context = stream_context_create([
+    'http' => [
+        'method'  => 'GET',
+        'timeout' => 10,
+        'header'  => "User-Agent: HA-Ingress-Proxy\r\n"
+    ]
 ]);
 
-$response = curl_exec($ch);
-$contentType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
-curl_close($ch);
+/* Anfrage */
+$response = @file_get_contents($targetUrl, false, $context);
+if ($response === false) {
+    die('Ziel nicht erreichbar');
+}
 
-/* Content-Type durchreichen */
-if ($contentType) {
-    header("Content-Type: $contentType");
+/* Content-Type übernehmen */
+if (isset($http_response_header)) {
+    foreach ($http_response_header as $h) {
+        if (stripos($h, 'Content-Type:') === 0) {
+            header($h);
+            break;
+        }
+    }
 }
 
 echo $response;
