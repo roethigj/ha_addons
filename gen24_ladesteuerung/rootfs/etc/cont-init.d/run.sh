@@ -169,7 +169,7 @@ crontab $Gen24_Path/cron_file
 $Gen24_Path/start_PythonScript.sh EnergyController.py 2>&1
 
 # nginx
-#!/bin/sh
+
 set -e
 
 CONFIG="$Gen24_Path/CONFIG/default.ini"
