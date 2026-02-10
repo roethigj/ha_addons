@@ -12,7 +12,7 @@ TARGET_HOST=$(grep -E '^hostNameOrIp=' "$FILE" | cut -d= -f2 | tr -d ' \r\n')
 
 if [ -z "$TARGET_HOST" ]; then
   echo "hostNameOrIp nicht gefunden"
-  exit 1
+  exit 0
 fi
 
 sed "s|__TARGET_HOST__|$TARGET_HOST|g" \
