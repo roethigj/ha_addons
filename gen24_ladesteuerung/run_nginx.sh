@@ -9,7 +9,7 @@ PRIV="$Gen24_Path/CONFIG/default_priv.ini"
 FILE="$CONFIG"
 [ -f "$PRIV" ] && FILE="$PRIV"
 
-TARGET_HOST=$(grep -E '^hostNameOrIp=' "$FILE" | cut -d= -f2 | tr -d ' \r\n')
+TARGET_HOST=$(grep -E '^[[:space:]]*hostNameOrIp[[:space:]]*=' "$FILE" | head -n1 | cut -d= -f2 | tr -d ' \r\n')
 
 if [ -z "$TARGET_HOST" ]; then
   echo "hostNameOrIp nicht gefunden"
