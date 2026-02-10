@@ -1,5 +1,5 @@
 server {
-    listen 80;
+    listen 8024;
 
     location / {
         proxy_pass http://__TARGET_HOST__/;
