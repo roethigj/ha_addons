@@ -20,3 +20,5 @@ sed "s|__TARGET_HOST__|$TARGET_HOST|g" \
     > /etc/nginx/nginx.conf
 
 exec nginx -g "daemon off;"
+
+exit 0
