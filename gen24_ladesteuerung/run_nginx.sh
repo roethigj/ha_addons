@@ -1,5 +1,6 @@
 #!/usr/bin/with-contenv bashio
 set -e
+Gen24_Path="/opt/Gen24_Ladesteuerung"
 
 CONFIG="$Gen24_Path/CONFIG/default.ini"
 PRIV="$Gen24_Path/CONFIG/default_priv.ini"
