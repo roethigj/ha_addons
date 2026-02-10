@@ -29,7 +29,7 @@ RUN chmod +x /run_nginx.sh
 
 RUN ln -s /usr/bin/php83 /usr/bin/php
 
-CMD ["/run_nginx.sh"]
+
 LABEL \    io.hass.name="GEN24 Ladesteuerung" \    io.hass.description="Wrapper-Add-on für wiggal/GEN24_Ladesteuerung" \    io.hass.type="addon" \    io.hass.arch="aarch64|amd64|armv7"
 
 
