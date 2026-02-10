@@ -17,7 +17,7 @@ RUN url=$(curl -s https://api.github.com/repos/wiggal/GEN24_Ladesteuerung/releas
 
 COPY first_run.sh /opt/Gen24_Ladesteuerung/
 COPY cron_draft /opt/Gen24_Ladesteuerung/
-COPY run_nginx.sh /opt/Gen24_Ladesteuerung/
+COPY run_nginx.sh /etc/cont-init.d/
 RUN rm -f /opt/Gen24_Ladesteuerung/html/6_tab_GEN24.php
 COPY 6_tab_GEN24.php /opt/Gen24_Ladesteuerung/html/
 COPY nginx.conf.template /etc/nginx/http.d/gen24.conf
@@ -25,7 +25,7 @@ COPY nginx.conf.template /etc/nginx/http.d/gen24.conf
 RUN chmod a+x /opt/Gen24_Ladesteuerung/start_PythonScript.sh 
 RUN chmod a+x /opt/Gen24_Ladesteuerung/first_run.sh 
 RUN chmod a+x /etc/cont-init.d/run.sh
-RUN chmod a+x /opt/Gen24_Ladesteuerung/run_nginx.sh
+RUN chmod a+x /etc/cont-init.d/run_nginx.sh
 
 RUN ln -s /usr/bin/php83 /usr/bin/php
 
