@@ -19,7 +19,6 @@ COPY first_run.sh /opt/Gen24_Ladesteuerung/
 COPY cron_draft /opt/Gen24_Ladesteuerung/
 RUN rm -f /opt/Gen24_Ladesteuerung/html/6_tab_GEN24.php
 COPY 6_tab_GEN24.php /opt/Gen24_Ladesteuerung/html/
-COPY GEN24_proxy.php /opt/Gen24_Ladesteuerung/html/
 COPY nginx.conf.template /etc/nginx/nginx.conf.template
 
 RUN chmod a+x /opt/Gen24_Ladesteuerung/start_PythonScript.sh 
