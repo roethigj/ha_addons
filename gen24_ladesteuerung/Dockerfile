@@ -19,6 +19,8 @@ COPY first_run.sh /opt/Gen24_Ladesteuerung/
 COPY cron_draft /opt/Gen24_Ladesteuerung/
 RUN rm -f /opt/Gen24_Ladesteuerung/html/6_tab_GEN24.php
 COPY 6_tab_GEN24.php /opt/Gen24_Ladesteuerung/html/
+RUN rm -f /opt/Gen24_Ladesteuerung/html/4_tab_config_ini.php
+COPY 4_tab_config_ini.php /opt/Gen24_Ladesteuerung/html/
 
 RUN chmod a+x /opt/Gen24_Ladesteuerung/start_PythonScript.sh 
 RUN chmod a+x /opt/Gen24_Ladesteuerung/first_run.sh 
