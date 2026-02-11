@@ -753,7 +753,6 @@ if (!copy($ini_file, $backup_file)) {
 // Ingress-sichere Basis-URL ermitteln
 $current_path = $_SERVER["REQUEST_URI"];
 $params = http_build_query([
-    'nachricht' => $nachricht ?? '',
     'tab' => $activeTab ?? ''
 ]);
 $redirect_url = $current_path . '?' . $params;
