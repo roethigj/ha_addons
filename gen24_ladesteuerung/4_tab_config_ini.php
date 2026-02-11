@@ -748,16 +748,9 @@ if (!copy($ini_file, $backup_file)) {
 
 // header('location: '.$_SERVER["PHP_SELF"].'?nachricht='.$nachricht);
 // NEU (funktioniert auch nach HTML-Ausgabe)
-//$redirect_url = $_SERVER["PHP_SELF"] . "?nachricht=" . urlencode($nachricht) . "&tab=" . $activeTab;
-//echo "<script type='text/javascript'>window.location.href='$redirect_url';</script>";
-// Ingress-sichere Basis-URL ermitteln
-$current_path = $_SERVER["REQUEST_URI"];
-$params = http_build_query([
-    'tab' => $activeTab ?? ''
-]);
-$redirect_url = $current_path . '?' . $params;
+$redirect_url = $_SERVER["PHP_SELF"] . "?nachricht=" . urlencode('gesichert') . "&tab=" . $activeTab;
+echo "<script type='text/javascript'>window.location.href='$redirect_url';</script>";
 
-echo "<script>window.location.href='" . $redirect_url . "';</script>";
 exit();
     break;
 
