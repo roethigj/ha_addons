@@ -573,7 +573,7 @@ if ($updatecheck == 'ja') {
 } else {
 echo '</div>';
 }
-if (isset($_GET["backup_file"])) {
+/*if (isset($_GET["backup_file"])) {
     $backup_file = $_GET["backup_file"];
 }
 
@@ -592,7 +592,7 @@ switch ($nachricht) {
     default:
         echo "<center>" . htmlspecialchars($nachricht) . "</center>";
 }
-
+*/
 
 
 echo '<br><center>';
