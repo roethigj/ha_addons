@@ -573,7 +573,28 @@ if ($updatecheck == 'ja') {
 } else {
 echo '</div>';
 }
-if ($nachricht != '') echo "<center>" . $nachricht . "</center>";
+
+if (isset($_GET["backup_file"])) {
+    $backup_file = $_GET["backup_file"];
+}
+
+switch ($nachricht) {
+
+    case '':
+        break;
+
+    case 4:
+        echo "<center>"
+            . "<span style=\"color:green\">" . htmlspecialchars($ini_file) . " wurde neu geschrieben!</span><br>"
+            . "<span style=\"color:red\">Backup in " . htmlspecialchars($backup_file) . "!</span>"
+            . "</center>";
+        break;
+
+    default:
+        echo "<center>" . htmlspecialchars($nachricht) . "</center>";
+        break;
+}
+
 echo '<br><center>';
 echo '<form method="POST" action="'.$_SERVER["PHP_SELF"].'">'."\n";
 echo '<select name="ini_file">';
@@ -583,7 +604,7 @@ echo '<input type="hidden" name="case" value="lesen">'."\n";
 echo '<input type="hidden" name="tab" value="'.$activeTab.'">'."\n";
 echo '<button type="submit">Auswahl anzeigen</button>';
 echo '</form>'."\n";
-echo '<br><br>';w
+echo '<br><br>';
     break;
 
 
