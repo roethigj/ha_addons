@@ -573,7 +573,16 @@ if ($updatecheck == 'ja') {
 } else {
 echo '</div>';
 }
-if ($nachricht != '') echo "<center>" . $nachricht . "</center>";
+if (isset($_GET["backup_file"])) $backup_file = $_GET["backup_file"];
+switch ($nachricht) {
+    case '': break
+    case 4: echo "<center>" '<span style="color:green"> '.$ini_file.' wurde neu geschrieben!</span><br><span style="color:red"> Backup in '.$backup_file.'!</span>'; 
+    default: echo "<center>" . $nachricht . "</center>";
+    }
+
+
+
+
 echo '<br><center>';
 echo '<form method="POST" action="'.$_SERVER["PHP_SELF"].'">'."\n";
 echo '<select name="ini_file">';
@@ -583,7 +592,7 @@ echo '<input type="hidden" name="case" value="lesen">'."\n";
 echo '<input type="hidden" name="tab" value="'.$activeTab.'">'."\n";
 echo '<button type="submit">Auswahl anzeigen</button>';
 echo '</form>'."\n";
-echo '<br><br>';
+echo '<br><br>';w
     break;
 
 
@@ -739,7 +748,7 @@ if (!copy($ini_file, $backup_file)) {
 } elseif (is_writeable($ini_file,)) { # Sicherung OK nun neue _priv.ini schreiben
     $handle = fopen($ini_file,"w");
     if (fwrite($handle, $write)) {
-        $nachricht .= '<span style="color:green"> '.$ini_file.' wurde neu geschrieben!</span><br><span style="color:red"> Backup in '.$backup_file.'!</span>';
+        $nachricht .= 4
     } else {
         $nachricht .= '<span style="color:red"> '.$ini_file.' konnte nicht geschrieben werden!!!</span>';
     }
@@ -753,6 +762,8 @@ if (!copy($ini_file, $backup_file)) {
 echo "<script>
     const params = new URLSearchParams();
     params.set('nachricht', " . json_encode($nachricht) . ");
+    params.set('ini_file', " . json_encode($ini_file) . ");
+    params.set('backup_file', " . json_encode($backup_file) . ");
     params.set('tab', " . json_encode($activeTab) . ");
     window.location.href = window.location.pathname + '?' + params.toString();
 </script>";
