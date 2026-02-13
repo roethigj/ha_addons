@@ -752,7 +752,7 @@ if (!copy($ini_file, $backup_file)) {
 // echo "<script type='text/javascript'>window.location.href='$redirect_url';</script>";
 echo "<script>
     const params = new URLSearchParams();
-    params.set('nachricht', " . gzencode($nachricht,9) . ");
+    params.set('nachricht', " . json_encode(gzencode($nachricht,9)) . ");
     params.set('tab', " . json_encode($activeTab) . ");
     window.location.href = window.location.pathname + '?' + params.toString();
 </script>";
