@@ -590,7 +590,7 @@ switch ($nachricht) {
         break;
 
     default:
-        echo "<center>" . htmlspecialchars($nachricht) . "</center>";
+        echo "<center>" . htmlspecialchars($nachricht) . "</center>"; break;
 }
 */
 
@@ -774,8 +774,6 @@ if (!copy($ini_file, $backup_file)) {
 echo "<script>
     const params = new URLSearchParams();
     params.set('nachricht', " . json_encode($nachricht) . ");
-    params.set('ini_file', " . json_encode($ini_file) . ");
-    params.set('backup_file', " . json_encode($backup_file) . ");
     params.set('tab', " . json_encode($activeTab) . ");
     window.location.href = window.location.pathname + '?' + params.toString();
 </script>";
