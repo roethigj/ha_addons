@@ -573,7 +573,7 @@ if ($updatecheck == 'ja') {
 } else {
 echo '</div>';
 }
-if ($nachricht != '') echo "<center>" . gzdecode($nachricht) . "</center>";
+if ($nachricht != '') echo "<center>" . gzuncompress(base64_decode($nachricht)) . "</center>";
 echo '<br><center>';
 echo '<form method="POST" action="'.$_SERVER["PHP_SELF"].'">'."\n";
 echo '<select name="ini_file">';
@@ -750,9 +750,10 @@ if (!copy($ini_file, $backup_file)) {
 // NEU (funktioniert auch nach HTML-Ausgabe)
 //$redirect_url = $_SERVER["PHP_SELF"] . "?nachricht=" . urlencode('gesichert') . "&tab=" . $activeTab;
 // echo "<script type='text/javascript'>window.location.href='$redirect_url';</script>";
+$text=base64_encode(gzcompress($nachricht,9));
 echo "<script>
     const params = new URLSearchParams();
-    params.set('nachricht', " . json_encode(gzencode($nachricht,9)) . ");
+    params.set('nachricht', " . json_encode($text) . ");
     params.set('tab', " . json_encode($activeTab) . ");
     window.location.href = window.location.pathname + '?' + params.toString();
 </script>";
