@@ -5,7 +5,7 @@ RUN \
     apk add --no-cache \
     bash git python3 py3-pip \
     php83 php83-sqlite3 \
-    busybox-suid curl coreutils file iputils-ping py3-requests nginx
+    busybox-suid curl coreutils file iputils-ping py3-requests
 
 ENV GEN24_DIR=/opt/Gen24_Ladesteuerung
 

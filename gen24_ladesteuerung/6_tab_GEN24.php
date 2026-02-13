@@ -27,11 +27,14 @@ fclose($fh);
 if ($host === '') die("hostNameOrIp nicht gefunden");
 
 // Ziel-URL: intern HTTP, extern als HTTPS
-$target_url = "http://$host/";
+//$target_url = "http://$host/";
 
 // Browser Redirect
 // Hier trick: wir nutzen Home Assistant Ingress HTTPS URL
 // In HA-Ingress-iframe ist der HTTPS-Pfad immer korrekt
-header("Content-Security-Policy: upgrade-insecure-requests"); // optional, erzwingt HTTPS
-header("Location: http://$host");
+//header("Content-Security-Policy: upgrade-insecure-requests"); // optional, erzwingt HTTPS
+//header("Location: http://$host");
+
+<iframe src="proxy.php"
+        style="width:100%;height:100%;border:0"></iframe>
 exit;
