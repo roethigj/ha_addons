@@ -751,12 +751,12 @@ if (!copy($ini_file, $backup_file)) {
 //$redirect_url = $_SERVER["PHP_SELF"] . "?nachricht=" . urlencode('gesichert') . "&tab=" . $activeTab;
 // echo "<script type='text/javascript'>window.location.href='$redirect_url';</script>";
 echo "<script>
-    const params = new URLSearchParams({
-        nachricht: 'gesichert',
-        tab: '" . addslashes($activeTab) . "'
-    });
+    const params = new URLSearchParams();
+    params.set('nachricht', " . json_encode($nachricht) . ");
+    params.set('tab', " . json_encode($activeTab) . ");
     window.location.href = window.location.pathname + '?' + params.toString();
 </script>";
+
 
 exit();
     break;
