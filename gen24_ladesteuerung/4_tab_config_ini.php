@@ -573,13 +573,25 @@ if ($updatecheck == 'ja') {
 } else {
 echo '</div>';
 }
-if (isset($_GET["backup_file"])) $backup_file = $_GET["backup_file"];
-switch ($nachricht) {
-    case '': break
-    case 4: echo "<center>" '<span style="color:green"> '.$ini_file.' wurde neu geschrieben!</span><br><span style="color:red"> Backup in '.$backup_file.'!</span>'; 
-    default: echo "<center>" . $nachricht . "</center>";
-    }
+if (isset($_GET["backup_file"])) {
+    $backup_file = $_GET["backup_file"];
+}
 
+switch ($nachricht) {
+
+    case '':
+        break;
+
+    case 4:
+        echo "<center>"
+            . "<span style=\"color:green\">" . htmlspecialchars($ini_file) . " wurde neu geschrieben!</span><br>"
+            . "<span style=\"color:red\">Backup in " . htmlspecialchars($backup_file) . "!</span>"
+            . "</center>";
+        break;
+
+    default:
+        echo "<center>" . htmlspecialchars($nachricht) . "</center>";
+}
 
 
 
