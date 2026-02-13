@@ -34,7 +34,5 @@ if ($host === '') die("hostNameOrIp nicht gefunden");
 // In HA-Ingress-iframe ist der HTTPS-Pfad immer korrekt
 //header("Content-Security-Policy: upgrade-insecure-requests"); // optional, erzwingt HTTPS
 //header("Location: http://$host");
-
-<iframe src="proxy.php"
-        style="width:100%;height:100%;border:0"></iframe>
+echo "<iframe src='proxy.php' style='width:100%;height:100%;border:0'></iframe>";
 exit;
