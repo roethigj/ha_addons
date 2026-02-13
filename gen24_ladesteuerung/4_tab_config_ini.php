@@ -748,8 +748,15 @@ if (!copy($ini_file, $backup_file)) {
 
 //header('location: '.$_SERVER["PHP_SELF"].'?nachricht='.$nachricht. '&tab=' . $activeTab);
 // NEU (funktioniert auch nach HTML-Ausgabe)
-$redirect_url = $_SERVER["PHP_SELF"] . "?nachricht=" . urlencode('gesichert') . "&tab=" . $activeTab;
-echo "<script type='text/javascript'>window.location.href='$redirect_url';</script>";
+//$redirect_url = $_SERVER["PHP_SELF"] . "?nachricht=" . urlencode('gesichert') . "&tab=" . $activeTab;
+// echo "<script type='text/javascript'>window.location.href='$redirect_url';</script>";
+echo "<script>
+    const params = new URLSearchParams({
+        nachricht: 'gesichert',
+        tab: '" . addslashes($activeTab) . "'
+    });
+    window.location.href = window.location.pathname + '?' + params.toString();
+</script>";
 
 exit();
     break;
