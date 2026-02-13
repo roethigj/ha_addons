@@ -760,7 +760,7 @@ if (!copy($ini_file, $backup_file)) {
 } elseif (is_writeable($ini_file,)) { # Sicherung OK nun neue _priv.ini schreiben
     $handle = fopen($ini_file,"w");
     if (fwrite($handle, $write)) {
-        $nachricht .= 4;
+        $nachricht .= '4';
     } else {
         $nachricht .= '<span style="color:red"> '.$ini_file.' konnte nicht geschrieben werden!!!</span>';
     }
