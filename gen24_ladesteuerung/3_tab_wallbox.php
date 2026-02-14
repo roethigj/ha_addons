@@ -71,8 +71,8 @@ if (isset($_POST['action'])) {
     }
 
     // Beim Weiterleiten die aktuelle Client-ID beibehalten
-    $only_script = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // ohne QUERY_STRING
-    $redirect_url = $only_script . '?tab=Wallbox'; // NEU: Tab hier fest anfügen, und REQUEST_URI für HA
+    //$only_script = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); // ohne QUERY_STRING
+    $redirect_url = $_SERVER["PHP_SELF"] . '?tab=Wallbox'; // NEU: Tab hier fest anfügen, und REQUEST_URI für HA
     if (isset($_POST['cp_id']) && !empty($_POST['cp_id'])) {
         $redirect_url .= '?cp_id=' . $_POST['cp_id'];
     }
