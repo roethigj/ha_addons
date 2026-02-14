@@ -23,6 +23,8 @@ RUN rm -f /opt/Gen24_Ladesteuerung/html/4_tab_config_ini.php
 COPY 4_tab_config_ini.php /opt/Gen24_Ladesteuerung/html/
 RUN rm -f /opt/Gen24_Ladesteuerung/html/proxy.php
 COPY proxy.php /opt/Gen24_Ladesteuerung/html/
+RUN rm -f /opt/Gen24_Ladesteuerung/html/3_tab_wallbox.php
+COPY 3_tab_wallbox.php /opt/Gen24_Ladesteuerung/html/
 
 RUN chmod a+x /opt/Gen24_Ladesteuerung/start_PythonScript.sh 
 RUN chmod a+x /opt/Gen24_Ladesteuerung/first_run.sh 
