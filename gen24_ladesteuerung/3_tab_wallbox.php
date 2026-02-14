@@ -82,11 +82,20 @@ if (isset($_POST['action'])) {
     //echo "<script type='text/javascript'>window.location.href='{$redirect_url}';</script>";
     
     echo "
+<script>
+    const params = new URLSearchParams();
+    params.set('nachricht', " . json_encode($nachricht_gz) . ");
+    params.set('tab', " . json_encode($activeTab) . ");
+    window.location.href = window.location.pathname + '?' + params.toString();
+</script>
+";
+    
+    echo "
 	<script>
     		const params = new URLSearchParams();
     		params.set('tab', " . json_encode('Wallox') . ");"
     		. if (isset($_POST['cp_id']) && !empty($_POST['cp_id'])) {
-    			"params.set('cp_id', " . json_encode($_POST['cp_id']) . ");"
+    			. "params.set('cp_id', " . json_encode($_POST['cp_id']) . ");"
     			}
     			
     		. "window.location.href = window.location.pathname + '?' + params.toString();
