@@ -93,9 +93,9 @@ if (isset($_POST['action'])) {
     echo "
 	<script>
     		const params = new URLSearchParams();
-    		params.set('tab', " . json_encode('Wallox') . ");";
+    		params.set('tab', " . json_encode('Wallbox') . ");";
     if (isset($_POST['cp_id']) && !empty($_POST['cp_id'])) {
-    	echo "params.set('cp_id', " . json_encode($_POST['cp_id']) . ");"
+    	echo "params.set('cp_id', " . json_encode($_POST['cp_id']) . ");";
     	}
     			
     echo "window.location.href = window.location.pathname + '?' + params.toString();
