@@ -4,7 +4,7 @@ FROM ${BUILD_FROM}
 RUN \
     apk add --no-cache \
     bash git python3 py3-pip \
-    php83 php83-sqlite3 \
+    php83 php83-sqlite3 php83-openssl \
     busybox-suid curl coreutils file iputils-ping py3-requests
 
 ENV GEN24_DIR=/opt/Gen24_Ladesteuerung
@@ -19,12 +19,6 @@ COPY first_run.sh /opt/Gen24_Ladesteuerung/
 COPY cron_draft /opt/Gen24_Ladesteuerung/
 RUN rm -f /opt/Gen24_Ladesteuerung/html/6_tab_GEN24.php
 COPY 6_tab_GEN24.php /opt/Gen24_Ladesteuerung/html/
-RUN rm -f /opt/Gen24_Ladesteuerung/html/4_tab_config_ini.php
-COPY 4_tab_config_ini.php /opt/Gen24_Ladesteuerung/html/
-RUN rm -f /opt/Gen24_Ladesteuerung/html/proxy.php
-COPY proxy.php /opt/Gen24_Ladesteuerung/html/
-RUN rm -f /opt/Gen24_Ladesteuerung/html/3_tab_wallbox.php
-COPY 3_tab_wallbox.php /opt/Gen24_Ladesteuerung/html/
 
 RUN chmod a+x /opt/Gen24_Ladesteuerung/start_PythonScript.sh 
 RUN chmod a+x /opt/Gen24_Ladesteuerung/first_run.sh 
