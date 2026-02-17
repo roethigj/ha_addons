@@ -1,5 +1,5 @@
 name: GEN24 Ladesteuerung - wrapper
-version: "0.1.4350-ha"
+version: "0.1.4351-ha"
 slug: gen24_ladesteuerung
 description: "Wrapper-Add-on für https://github.com/wiggal/GEN24_Ladesteuerung/ (Fronius GEN24 prognosebasierte Akku-Ladesteuerung + WebUI)"
 url: https://github.com/roethigj/ha_addons/tree/main/gen24_ladesteuerung
@@ -16,6 +16,7 @@ hassio_api: true
 ingress: true
 ingress_port: 2424
 ingress_stream: false
+host_network: true
 panel_icon: mdi:solar-power
 init: false
 map:
