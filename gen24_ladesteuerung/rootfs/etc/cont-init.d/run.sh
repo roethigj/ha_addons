@@ -75,6 +75,11 @@ if [ -f $Gen24_Path/CONFIG/config_priv.ini ]; then
 #    ln $Gen24_Path/CONFIG/config_priv.ini $Gen24_Path/html/config_priv.ini
 fi
 
+
+if [ ! -d "/data/html" ]; then
+    mkdir -p "/data/html" 
+fi
+
 if [ -f /data/config_priv.ini ]; then
   mv /data/config_priv.ini /data/html/config_priv.ini
 fi
@@ -98,10 +103,6 @@ find "$Gen24_Path/CONFIG" -type f -name "*_priv.ini" -print0 | while IFS= read -
         rm "$filepath" 
     fi
 done
-
-if [ ! -d "/data/html" ]; then
-    mkdir -p "/data/html" 
-fi
 
 find "$Gen24_Path/html" -type f -name "config_priv.ini" -print0 | while IFS= read -r -d '' filepath; do
     file=$(basename "$filepath")   # nur Dateiname ohne Pfad
