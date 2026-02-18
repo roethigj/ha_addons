@@ -116,8 +116,8 @@ if [ -f "$Gen24_Path/CONFIG/default_priv.ini" ]; then
         $Gen24_Path/CONFIG/default.ini > $Gen24_Path/CONFIG/default_priv.ini
 fi
 
-if [ -f "$Gen24_Path/html/config.ini" ]; then
-    sed -e "s#iframe:6_tab_GEN24.php#http://$ip_adresse/#g" "$Gen24_Path/html/config.ini"
+if [ -f "$Gen24_Path/html/config_priv.ini" ]; then
+    sed -e "s#iframe:6_tab_GEN24.php#http://$ip_adresse/#g" "$Gen24_Path/html/config_priv.ini"
 fi
 
 if [ ! -f /data/Crontab.log ]; then
