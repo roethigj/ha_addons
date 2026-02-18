@@ -99,6 +99,10 @@ find "$Gen24_Path/CONFIG" -type f -name "*_priv.ini" -print0 | while IFS= read -
     fi
 done
 
+if [ ! -d "/data/html" ]; then
+    mkdir -p "/data/html" 
+fi
+
 find "$Gen24_Path/html" -type f -name "config_priv.ini" -print0 | while IFS= read -r -d '' filepath; do
     file=$(basename "$filepath")   # nur Dateiname ohne Pfad
     if [ ! -f "/data/html/$file" ]; then
