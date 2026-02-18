@@ -24,7 +24,7 @@ else
     echo "Datei '$CHECKFILE' existiert bereits. Keine Aktion erforderlich."
 fi
 
-# Pfade für ingress anpassen
+# Pfade für ingress anpassen - obsolet
 if [ -f "$Gen24_Path/html/config.php" ]; then
     sed -i -e "s#^\$PythonDIR *= *.*#\$PythonDIR = '$Gen24_Path';#" \
     $Gen24_Path/html/config.php
@@ -68,12 +68,12 @@ else
 fi
 
 #nicht mehr nötig?
-if [ ! -f $Gen24_Path/CONFIG/config_priv.ini ]; then
-  cp $Gen24_Path/html/config.ini $Gen24_Path/CONFIG/config_priv.ini
-  ln $Gen24_Path/CONFIG/config_priv.ini $Gen24_Path/html/config_priv.ini
-else
-    ln $Gen24_Path/CONFIG/config_priv.ini $Gen24_Path/html/config_priv.ini
-fi
+#if [ ! -f $Gen24_Path/CONFIG/config_priv.ini ]; then
+#  cp $Gen24_Path/html/config.ini $Gen24_Path/CONFIG/config_priv.ini
+#  ln $Gen24_Path/CONFIG/config_priv.ini $Gen24_Path/html/config_priv.ini
+#else
+#    ln $Gen24_Path/CONFIG/config_priv.ini $Gen24_Path/html/config_priv.ini
+#fi
 
 if "$(bashio::config 'dynamic_price_check')"; then
     if [ ! -f /data/dynprice_priv.ini ]; then
@@ -95,9 +95,23 @@ find "$Gen24_Path/CONFIG" -type f -name "*_priv.ini" -print0 | while IFS= read -
     fi
 done
 
+find "$Gen24_Path/html" -type f -name "config_priv.ini" -print0 | while IFS= read -r -d '' filepath; do
+    file=$(basename "$filepath")   # nur Dateiname ohne Pfad
+    if [ ! -f "/data/html/$file" ]; then
+        mv "$filepath" "/data/html"
+    else
+        rm "$filepath" 
+    fi
+done
+
 find "/data/" -type f -name "*_priv.ini" -print0 | while IFS= read -r -d '' filepath; do
     file=$(basename "$filepath")   # nur Dateiname ohne Pfad
     ln -s "/data/$file" "$Gen24_Path/CONFIG/"
+done
+
+find "/data/html/" -type f -name "config_priv.ini" -print0 | while IFS= read -r -d '' filepath; do
+    file=$(basename "$filepath")   # nur Dateiname ohne Pfad
+    ln -s "/data/html/$file" "$Gen24_Path/html/"
 done
 
 # CONFIG/default_priv.ini mit Benutzereingaben erzeugen
