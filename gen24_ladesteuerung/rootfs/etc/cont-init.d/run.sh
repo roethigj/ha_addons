@@ -106,7 +106,7 @@ fi
 find "$Gen24_Path/html" -type f -name "config_priv.ini" -print0 | while IFS= read -r -d '' filepath; do
     file=$(basename "$filepath")   # nur Dateiname ohne Pfad
     if [ ! -f "/data/html/$file" ]; then
-        mv "$filepath" "/data/html"
+        mv "$filepath" "/data/html/"
     else
         rm "$filepath" 
     fi
