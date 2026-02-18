@@ -69,13 +69,13 @@ fi
 
 #nicht mehr nötig? -> Anpassung
 if [ -f $Gen24_Path/CONFIG/config_priv.ini ]; then
-  mv $Gen24_Path/html/config_priv.ini $Gen24_Path/html/config_priv.ini
+  mv $Gen24_Path/CONFIG/config_priv.ini $Gen24_Path/html/config_priv.ini
 #  ln $Gen24_Path/CONFIG/config_priv.ini $Gen24_Path/html/config_priv.ini
 #else
 #    ln $Gen24_Path/CONFIG/config_priv.ini $Gen24_Path/html/config_priv.ini
 fi
 
-if [ /data/config_priv.ini ]; then
+if [ -f /data/config_priv.ini ]; then
   mv /data/config_priv.ini /data/html/config_priv.ini
 fi
 
