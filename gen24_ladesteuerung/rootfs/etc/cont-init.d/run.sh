@@ -67,7 +67,7 @@ else
     ln -s /data/Prog_Steuerung.sqlite $Gen24_Path/CONFIG/
 fi
 
-#nicht mehr nötig
+#nicht mehr nötig?
 #if [ ! -f $Gen24_Path/CONFIG/config_priv.ini ]; then
 #  cp $Gen24_Path/html/config.ini $Gen24_Path/CONFIG/config_priv.ini
 #  ln $Gen24_Path/CONFIG/config_priv.ini $Gen24_Path/html/config_priv.ini
@@ -114,6 +114,10 @@ if [ -f "$Gen24_Path/CONFIG/default_priv.ini" ]; then
         -e "s/^battery_capacity_Wh *= *.*/battery_capacity_Wh = $battery_capacity_wh/" \
         -e "s/^Einfacher_PHP_Webserver *= *.*/Einfacher_PHP_Webserver = $webserver/" \
         $Gen24_Path/CONFIG/default.ini > $Gen24_Path/CONFIG/default_priv.ini
+fi
+
+if [ -f "$Gen24_Path/html/config.ini" ]; then
+    sed -e "s#iframe:6_tab_GEN24.php#http://$ip_adresse/#g" "$Gen24_Path/html/config.ini"
 fi
 
 if [ ! -f /data/Crontab.log ]; then
