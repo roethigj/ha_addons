@@ -67,13 +67,17 @@ else
     ln -s /data/Prog_Steuerung.sqlite $Gen24_Path/CONFIG/
 fi
 
-#nicht mehr nötig?
-#if [ ! -f $Gen24_Path/CONFIG/config_priv.ini ]; then
-#  cp $Gen24_Path/html/config.ini $Gen24_Path/CONFIG/config_priv.ini
+#nicht mehr nötig? -> Anpassung
+if [ -f $Gen24_Path/CONFIG/config_priv.ini ]; then
+  mv $Gen24_Path/html/config_priv.ini $Gen24_Path/html/config_priv.ini
 #  ln $Gen24_Path/CONFIG/config_priv.ini $Gen24_Path/html/config_priv.ini
 #else
 #    ln $Gen24_Path/CONFIG/config_priv.ini $Gen24_Path/html/config_priv.ini
-#fi
+fi
+
+if [ /data/config_priv.ini ]; then
+  mv /data/config_priv.ini /data/html/config_priv.ini
+fi
 
 if "$(bashio::config 'dynamic_price_check')"; then
     if [ ! -f /data/dynprice_priv.ini ]; then
