@@ -15,10 +15,6 @@ advanced: true
 hassio_api: true
 ingress: true
 ingress_port: 2424
-ingress_stream: true
-host_network: true
-host_ipc: true
-host_uts: true
 panel_icon: mdi:solar-power
 init: false
 map:
