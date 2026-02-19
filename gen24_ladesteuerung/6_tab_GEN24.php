@@ -2,8 +2,44 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+require_once "config_parser.php";
+
+$file = $PythonDIR . '/CONFIG/default.ini';
+if (file_exists($PythonDIR . '/CONFIG/default_priv.ini')) {
+    $file = $PythonDIR . '/CONFIG/default_priv.ini';
+$file = $PythonDIR.'/CONFIG/default.ini';
+if (file_exists($PythonDIR.'/CONFIG/default_priv.ini')) {
+    $file = $PythonDIR.'/CONFIG/default_priv.ini';
+}
+
+$nachricht = $_GET["nachricht"] ?? '';
+if ($nachricht !== '') {
+    echo htmlspecialchars($nachricht) . "<br><br>";
+}
+
+$host = '';
+$lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+foreach ($lines as $zeile) {
+$myfile = fopen($file, "r") or die("Kann Datei $file nicht öffnen!");
+while (!feof($myfile)) {
+    $zeile = fgets($myfile);
+    if (strpos($zeile, 'hostNameOrIp') !== false && strpos($zeile, '=') !== false) {
+        [, $value] = explode("=", $zeile, 2);
+        [$key, $value] = explode("=", $zeile, 2);
+        $host = trim($value);
+        break;
+    }
+}
+fclose($myfile);
+
+if ($host === '') {
+    die("hostNameOrIp nicht gefunden");
+}
+
+
 // ======= KONFIG =======
-$targetBase = "http://192.168.178.106";  // <- anpassen
+$targetBase = 'http://' . $host;  // <- anpassen
 // =======================
 
 // Request-Daten
