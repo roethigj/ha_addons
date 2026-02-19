@@ -26,13 +26,8 @@ if (!preg_match('#^https?://#', $host)) {
     $host = 'http://' . $host;
 }
 
-/*
-|--------------------------------------------------------------------------
-| 1️⃣ Frontend-Modus → HTML mit iframe
-|--------------------------------------------------------------------------
-*/
+// -------------------- Frontend-Modus → HTML mit iframe --------------------
 if (!isset($_GET['proxy'])) {
-
     $self = strtok($_SERVER["REQUEST_URI"], '?');
 
     echo '<!DOCTYPE html>
@@ -41,38 +36,31 @@ if (!isset($_GET['proxy'])) {
 <meta charset="utf-8">
 <title>Proxy Anzeige</title>
 <style>
-html, body {
-    margin:0;
-    padding:0;
-    height:100%;
-}
-iframe {
-    width:100%;
-    height:100%;
-    border:none;
-}
+html, body { margin:0; padding:0; height:100%; }
+iframe { width:100%; height:100%; border:none; }
 </style>
 </head>
 <body>
-
-<iframe src="' . htmlspecialchars($self) . '?proxy=1"></iframe>
-
+<iframe src="' . htmlspecialchars($self) . '?proxy=1&tab=Gen24"></iframe>
 </body>
 </html>';
 
     exit;
 }
 
-/*
-|--------------------------------------------------------------------------
-| 2️⃣ Proxy-Modus → Nur Body ausgeben
-|--------------------------------------------------------------------------
-*/
-
+// -------------------- Proxy-Modus → Nur Body --------------------
 $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
 
-/* proxy=1 aus Query entfernen */
-$requestUri = preg_replace('/(\?|&)tab=Gen24/', '', $requestUri);
+// query-Parameter proxy=1 entfernen, tab=Gen24 bleibt erhalten
+$queryString = $_SERVER['QUERY_STRING'] ?? '';
+parse_str($queryString, $queryParams);
+unset($queryParams['proxy']);
+$qs = http_build_query($queryParams);
+if ($qs !== '') {
+    $requestUri = strtok($_SERVER['REQUEST_URI'], '?') . '?' . $qs;
+} else {
+    $requestUri = strtok($_SERVER['REQUEST_URI'], '?');
+}
 
 $url = rtrim($host, '/') . $requestUri;
 
@@ -100,7 +88,7 @@ foreach (getallheaders() as $key => $value) {
 }
 curl_setopt($ch, CURLOPT_HTTPHEADER, $forwardHeaders);
 
-// SSL optional (für Self-Signed)
+// SSL optional (Self-Signed)
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
 
@@ -117,22 +105,4 @@ $headerBlock = substr($response, 0, $headerSize);
 $body = substr($response, $headerSize);
 
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-http_response_code($httpCode);
-
-curl_close($ch);
-
-// Sicherheitsheader entfernen
-foreach (explode("\r\n", $headerBlock) as $header) {
-    if (
-        stripos($header, 'X-Frame-Options:') === false &&
-        stripos($header, 'Content-Security-Policy:') === false &&
-        stripos($header, 'Content-Length:') === false &&
-        stripos($header, 'Transfer-Encoding:') === false
-    ) {
-        if (trim($header) !== '') {
-            header($header, false);
-        }
-    }
-}
-
-echo $body;
+http
