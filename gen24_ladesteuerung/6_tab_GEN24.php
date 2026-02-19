@@ -1,69 +1,76 @@
 <?php
-// Ziel-IP (interne Adresse im Docker/HA-Netzwerk)
-$targetBase = "http:/192.168.178.106";  // <- ANPASSEN!
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-// Angeforderter Pfad + Query übernehmen
-$requestUri = $_SERVER['REQUEST_URI'];
+// ======= KONFIG =======
+$targetBase = "http://192.168.178.106";  // <- anpassen
+// =======================
+
+// Request-Daten
+$requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+$method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 $targetUrl = $targetBase . $requestUri;
 
-// HTTP-Methode übernehmen (GET, POST, PUT, DELETE ...)
-$method = $_SERVER['REQUEST_METHOD'];
-
-// Header übernehmen
+// Header manuell aufbauen (HA-kompatibel)
 $headers = [];
-foreach (getallheaders() as $name => $value) {
-    // Host-Header nicht weiterleiten (wird neu gesetzt)
-    if (strtolower($name) !== 'host') {
-        $headers[] = "$name: $value";
+foreach ($_SERVER as $key => $value) {
+    if (strpos($key, 'HTTP_') === 0) {
+        $header = str_replace('_', '-', substr($key, 5));
+        if (strtolower($header) !== 'host') {
+            $headers[] = "$header: $value";
+        }
     }
 }
 
-// Body (z.B. bei POST/PUT)
+// Body holen
 $body = file_get_contents("php://input");
 
-// cURL Initialisieren
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $targetUrl);
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HEADER, true);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
+// cURL
+$ch = curl_init($targetUrl);
+
+curl_setopt_array($ch, [
+    CURLOPT_CUSTOMREQUEST  => $method,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HEADER         => true,
+    CURLOPT_HTTPHEADER     => $headers,
+    CURLOPT_FOLLOWLOCATION => false,
+    CURLOPT_TIMEOUT        => 30,
+]);
 
 if (!empty($body)) {
     curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
 }
 
-// Anfrage ausführen
 $response = curl_exec($ch);
 
 if ($response === false) {
     http_response_code(502);
-    echo "Proxy-Fehler: " . curl_error($ch);
+    echo "cURL Error: " . curl_error($ch);
     curl_close($ch);
     exit;
 }
 
-// Response trennen (Header + Body)
-$headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
-$responseHeaders = substr($response, 0, $headerSize);
-$responseBody = substr($response, $headerSize);
-
-// HTTP-Statuscode übernehmen
 $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-http_response_code($statusCode);
+$headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+
+$responseHeaders = substr($response, 0, $headerSize);
+$responseBody    = substr($response, $headerSize);
 
 curl_close($ch);
 
-// Response-Header weitergeben
-$headerLines = explode("\r\n", $responseHeaders);
-foreach ($headerLines as $headerLine) {
-    if (stripos($headerLine, 'Transfer-Encoding:') === false &&
+// Status setzen
+http_response_code($statusCode);
+
+// Header weitergeben
+foreach (explode("\r\n", $responseHeaders) as $headerLine) {
+    if (
+        stripos($headerLine, 'Transfer-Encoding:') === false &&
         stripos($headerLine, 'Content-Length:') === false &&
-        stripos($headerLine, 'HTTP/') === false) {
+        stripos($headerLine, 'HTTP/') === false &&
+        !empty($headerLine)
+    ) {
         header($headerLine, false);
     }
 }
 
-// Body ausgeben
 echo $responseBody;
