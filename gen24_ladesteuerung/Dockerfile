@@ -1,15 +1,11 @@
 ARG BUILD_FROM
-FROM ${BUILD_FROM}
+FROM php:8.3-cli-alpine
 
 RUN \
     apk add --no-cache \
     bash git python3 py3-pip \
     php83 php83-sqlite3 php83-openssl \
-    busybox-suid curl coreutils file iputils-ping py3-requests \
-    curl-dev build-base \
-    && docker-php-ext-install curl \
-    && apk del build-base
-
+    busybox-suid curl php83-curl coreutils file iputils-ping py3-requests
 
 ENV GEN24_DIR=/opt/Gen24_Ladesteuerung
 
