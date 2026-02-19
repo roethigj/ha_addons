@@ -27,24 +27,61 @@ fclose($myfile);
 if ($host === '') {
     die("hostNameOrIp nicht gefunden");
 }
-?>
+<?php
 
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="utf-8">
-    <title>Ingress Anzeige</title>
-    <style>
-        html, body, iframe {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-    </style>
-</head>
-<body>
-    <iframe src="https://<?= htmlspecialchars($host) ?>"></iframe>
-</body>
-</html>
+// Zielserver
+$target = $host;
+
+// Angeforderter Pfad weiterreichen
+$requestUri = $_SERVER['REQUEST_URI'];
+$url = rtrim($target, '/') . $requestUri;
+
+// cURL initialisieren
+$ch = curl_init($url);
+
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HEADER, true);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+
+// Request-Methode übernehmen (GET, POST, etc.)
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $_SERVER['REQUEST_METHOD']);
+
+// POST-Daten weiterreichen
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    curl_setopt($ch, CURLOPT_POSTFIELDS, file_get_contents('php://input'));
+}
+
+// Response holen
+$response = curl_exec($ch);
+
+if ($response === false) {
+    http_response_code(502);
+    echo "Proxy Fehler: " . curl_error($ch);
+    exit;
+}
+
+$headerSize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+$headers = substr($response, 0, $headerSize);
+$body = substr($response, $headerSize);
+
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+http_response_code($httpCode);
+
+curl_close($ch);
+
+// Header filtern (iframe-blockierende Header entfernen)
+$headerLines = explode("\r\n", $headers);
+
+foreach ($headerLines as $header) {
+    if (
+        stripos($header, 'X-Frame-Options:') === false &&
+        stripos($header, 'Content-Security-Policy:') === false &&
+        stripos($header, 'Content-Length:') === false
+    ) {
+        header($header);
+    }
+}
+
+// Body ausgeben
+echo $body;
+
