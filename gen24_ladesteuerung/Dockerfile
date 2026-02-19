@@ -9,7 +9,7 @@ RUN \
 
 ENV GEN24_DIR=/opt/Gen24_Ladesteuerung
 
-COPY rootfs/etc/run.sh /
+COPY rootfs/etc/cont-init.d/run.sh /
 RUN url=$(curl -s https://api.github.com/repos/wiggal/GEN24_Ladesteuerung/releases/latest \
     | jq -r '[.assets[0].browser_download_url,.zipball_url] | map(select(.!=null and .!=""))[0]') && curl -L -N -o /tmp/gen24.zip "$url" \
     && unzip -o /tmp/gen24.zip -d /tmp \
