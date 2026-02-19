@@ -30,9 +30,9 @@ if [ -f "$Gen24_Path/html/config.php" ]; then
     $Gen24_Path/html/config.php
 fi
 
-if [ -f "$Gen24_Path/html/6_tab_GEN24.php" ]; then
-    sed -i -e "s#http://#https://#g" "$Gen24_Path/html/6_tab_GEN24.php"
-fi
+#if [ -f "$Gen24_Path/html/6_tab_GEN24.php" ]; then
+#    sed -i -e "s#http://#https://#g" "$Gen24_Path/html/6_tab_GEN24.php"
+#fi
 
 find "$Gen24_Path/html" -type f -name "*.php" -print0 | while IFS= read -r -d '' file; do
     sed -i 's#'\''.\$_SERVER\["PHP_SELF"\].'\''##g' "$file"
