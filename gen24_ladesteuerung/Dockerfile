@@ -26,6 +26,9 @@ RUN chmod a+x /etc/cont-init.d/run.sh
 
 RUN ln -s /usr/bin/php83 /usr/bin/php
 
+EXPOSE 2424
+
+CMD ["php", "-S", "0.0.0.0:2424", "-t", "/app"]
 
 LABEL \    io.hass.name="GEN24 Ladesteuerung" \    io.hass.description="Wrapper-Add-on für wiggal/GEN24_Ladesteuerung" \    io.hass.type="addon" \    io.hass.arch="aarch64|amd64|armv7"
 
