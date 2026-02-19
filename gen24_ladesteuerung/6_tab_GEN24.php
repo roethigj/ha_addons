@@ -72,7 +72,7 @@ iframe {
 $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
 
 /* proxy=1 aus Query entfernen */
-$requestUri = preg_replace('/(\?|&)proxy=1/', '', $requestUri);
+$requestUri = preg_replace('/(\?|&)tab=Gen24/', '', $requestUri);
 
 $url = rtrim($host, '/') . $requestUri;
 
