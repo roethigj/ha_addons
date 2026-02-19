@@ -27,8 +27,6 @@ fclose($myfile);
 if ($host === '') {
     die("hostNameOrIp nicht gefunden");
 }
-<?php
-
 // Zielserver
 $target = $host;
 
