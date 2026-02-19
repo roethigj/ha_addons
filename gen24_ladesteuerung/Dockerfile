@@ -6,8 +6,9 @@ RUN \
     bash git python3 py3-pip \
     php83 php83-sqlite3 php83-openssl \
     busybox-suid curl coreutils file iputils-ping py3-requests \
-    libcurl4-openssl-dev \
+    curl-dev build-base \
     && docker-php-ext-install curl \
+    && apk del build-base
 
 
 ENV GEN24_DIR=/opt/Gen24_Ladesteuerung
