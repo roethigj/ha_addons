@@ -7,7 +7,8 @@ $targetBase = "http://192.168.178.106";  // <- anpassen
 // =======================
 
 // Request-Daten
-$requestUri = str_replace("/proxy.php", "", $_SERVER['REQUEST_URI']) ?? '/';
+$scriptName = $_SERVER['SCRIPT_NAME'];
+$requestUri = str_replace($scriptName, '', $_SERVER['REQUEST_URI']);
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 $targetUrl = $targetBase . $requestUri;
 
