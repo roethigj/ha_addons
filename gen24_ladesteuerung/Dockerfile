@@ -27,7 +27,7 @@ RUN chmod a+x /run.sh
 
 RUN ln -s /usr/bin/php83 /usr/bin/php
 
-CMD ["run.sh"]
+CMD ["/run.sh"]
 
 
 LABEL \    io.hass.name="GEN24 Ladesteuerung" \    io.hass.description="Wrapper-Add-on für wiggal/GEN24_Ladesteuerung" \    io.hass.type="addon" \    io.hass.arch="aarch64|amd64|armv7"
