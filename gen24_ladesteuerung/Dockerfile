@@ -9,7 +9,7 @@ RUN \
 
 ENV GEN24_DIR=/opt/Gen24_Ladesteuerung
 
-COPY rootfs /
+COPY rootfs/etc/run.sh /
 RUN url=$(curl -s https://api.github.com/repos/wiggal/GEN24_Ladesteuerung/releases/latest \
     | jq -r '[.assets[0].browser_download_url,.zipball_url] | map(select(.!=null and .!=""))[0]') && curl -L -N -o /tmp/gen24.zip "$url" \
     && unzip -o /tmp/gen24.zip -d /tmp \
@@ -25,6 +25,8 @@ RUN chmod a+x /opt/Gen24_Ladesteuerung/first_run.sh
 RUN chmod a+x /etc/cont-init.d/run.sh
 
 RUN ln -s /usr/bin/php83 /usr/bin/php
+
+CMD ["run.sh"]
 
 
 LABEL \    io.hass.name="GEN24 Ladesteuerung" \    io.hass.description="Wrapper-Add-on für wiggal/GEN24_Ladesteuerung" \    io.hass.type="addon" \    io.hass.arch="aarch64|amd64|armv7"
