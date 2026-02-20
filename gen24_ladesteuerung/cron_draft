@@ -5,5 +5,5 @@
 #sol_ha 4 3,7,9,11,13,15,17,19 * * * REPO_DIR/start_PythonScript.sh REPO_DIR/ADDONS/Solcast_WeatherData_from_HA_file.py
 #open 32 * * * * REPO_DIR/start_PythonScript.sh REPO_DIR/FORECAST/OpenMeteo_WeatherData.py
 #sol_prog 7 3,7,9,11,13,15,17,19 * * * REPO_DIR/start_PythonScript.sh REPO_DIR/FORECAST/Solarprognose_WeatherData.py
-#dyn_price 58 * * * * REPO_DIR/start_PythonScript.sh -o REPO_DIR/LOG_DynamicPriceCheck.log REPO_DIR/DynamicPriceCheck.py
+#dyn_price 58 * * * * REPO_DIR/start_PythonScript.sh -o LOG_DynamicPriceCheck.log REPO_DIR/DynamicPriceCheck.py
 # 0 0 * * 1 mv REPO_DIR/Crontab.log REPO_DIR/Crontab.log_weg

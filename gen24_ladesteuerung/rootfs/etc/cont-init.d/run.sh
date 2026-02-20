@@ -140,7 +140,7 @@ if [ -f "$Gen24_Path/CONFIG/default_priv.ini" ]; then
 fi
 
 if [ -f "$Gen24_Path/html/config_priv.ini" ]; then
-    sed -e "s#iframe:6_tab_GEN24.php#http://$ip_adresse/#g" "$Gen24_Path/html/config_priv.ini">"$Gen24_Path/html/config_priv.ini"
+    sed -i -e "s#iframe:6_tab_GEN24.php#http://$ip_adresse/#g" "$Gen24_Path/html/config_priv.ini"
 fi
 
 if [ ! -f /data/Crontab.log ]; then
