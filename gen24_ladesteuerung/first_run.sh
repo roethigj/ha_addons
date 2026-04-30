@@ -15,9 +15,9 @@ if [ ! -s "CONFIG/Prog_Steuerung.sqlite" ]; then
     python3 -c "from FUNCTIONS.SQLall import sqlall; sqlall().create_database_ProgSteuerung('$Gen24_Path/CONFIG/Prog_Steuerung.sqlite')"
 fi
 
-cp -n $Gen24_Path/CONFIG/charge.ini $Gen24_Path/CONFIG/charge_priv.ini
-cp -n $Gen24_Path/CONFIG/default.ini $Gen24_Path/CONFIG/default_priv.ini
-cp -n $Gen24_Path/CONFIG/weather.ini $Gen24_Path/CONFIG/weather_priv.ini
-cp -n $Gen24_Path/CONFIG/dynprice.ini $Gen24_Path/CONFIG/dynprice_priv.ini
-cp -n $Gen24_Path/html/config.ini $Gen24_Path/CONFIG/html/config_priv.ini
+install -D $Gen24_Path/CONFIG/charge.ini $Gen24_Path/CONFIG/charge_priv.ini
+install -D $Gen24_Path/CONFIG/default.ini $Gen24_Path/CONFIG/default_priv.ini
+install -D $Gen24_Path/CONFIG/weather.ini $Gen24_Path/CONFIG/weather_priv.ini
+install -D $Gen24_Path/CONFIG/dynprice.ini $Gen24_Path/CONFIG/dynprice_priv.ini
+install -D $Gen24_Path/html/config.ini $Gen24_Path/CONFIG/html/config_priv.ini
 
